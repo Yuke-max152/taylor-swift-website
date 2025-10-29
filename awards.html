@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor Swift - Awards</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#A80000',
+                        secondary: '#FFD700',
+                        light: '#F5F5F5',
+                        dark: '#1A1A1A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+            .filter-active {
+                background-color: theme('colors.primary');
+                color: white;
+            }
+            .award-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .award-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">Taylor Swift</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-primary transition-all-300">Home</a>
+                    <a href="albums.html" class="hover:text-primary transition-all-300">Albums</a>
+                    <a href="singles.html" class="hover:text-primary transition-all-300">Singles</a>
+                    <a href="awards.html" class="text-primary font-medium hover:text-secondary transition-all-300">Awards</a>
+                    <a href="gallery.html" class="hover:text-primary transition-all-300">Gallery</a>
+                    <a href="timeline.html" class="hover:text-primary transition-all-300">Timeline</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-dark focus:outline-none">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+                <a href="index.html" class="block py-2 hover:text-primary">Home</a>
+                <a href="albums.html" class="block py-2 hover:text-primary">Albums</a>
+                <a href="singles.html" class="block py-2 hover:text-primary">Singles</a>
+                <a href="awards.html" class="block py-2 text-primary font-medium">Awards</a>
+                <a href="gallery.html" class="block py-2 hover:text-primary">Gallery</a>
+                <a href="timeline.html" class="block py-2 hover:text-primary">Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-primary text-white py-24 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Awards & Achievements</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Celebrating Taylor Swift's remarkable career and the numerous awards she has won.</p>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Stat 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl font-bold text-primary mb-4">14</div>
+                    <h3 class="text-xl font-semibold mb-2">Grammy Awards</h3>
+                    <p class="text-gray-600">Including four Album of the Year wins, making her the first woman to achieve this feat.</p>
+                </div>
+                
+                <!-- Stat 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl font-bold text-primary mb-4">40</div>
+                    <h3 class="text-xl font-semibold mb-2">American Music Awards</h3>
+                    <p class="text-gray-600">The most wins by any artist in AMA history, including six Artist of the Year awards.</p>
+                </div>
+                
+                <!-- Stat 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl font-bold text-primary mb-4">29</div>
+                    <h3 class="text-xl font-semibold mb-2">Billboard Music Awards</h3>
+                    <p class="text-gray-600">Including Woman of the Year (2011, 2014, 2016) and Artist of the Year (2013).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-8 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up">
+                <button class="filter-btn filter-active px-4 py-2 rounded-full transition-all-300" data-filter="all">All Awards</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="grammy">Grammy Awards</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="ama">American Music Awards</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="billboard">Billboard Music Awards</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="vma">MTV Video Music Awards</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="cma">Country Music Association Awards</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Grid -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="awards-grid">
+                <!-- Awards will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-4">Taylor Swift</h3>
+                    <p class="text-gray-400">A comprehensive guide to Taylor Swift's music career.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-gray-400 hover:text-white transition-all-300">Home</a></li>
+                            <li><a href="albums.html" class="text-gray-400 hover:text-white transition-all-300">Albums</a></li>
+                            <li><a href="singles.html" class="text-gray-400 hover:text-white transition-all-300">Singles</a></li>
+                            <li><a href="awards.html" class="text-gray-400 hover:text-white transition-all-300">Awards</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">More</h4>
+                        <ul class="space-y-2">
+                            <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-all-300">Gallery</a></li>
+                            <li><a href="timeline.html" class="text-gray-400 hover:text-white transition-all-300">Timeline</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-twitter mr-2"></i> Twitter</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-instagram mr-2"></i> Instagram</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-youtube mr-2"></i> YouTube</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-spotify mr-2"></i> Spotify</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Taylor Swift Music Career. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Awards data
+            const awardsData = [
+                // Grammy Awards
+                {
+                    id: 1,
+                    title: "Album of the Year",
+                    year: 2024,
+                    category: "grammy",
+                    description: "Won for 'Midnights', making Taylor the first artist to win Album of the Year four times.",
+                    icon: "fa-trophy",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 2,
+                    title: "Best Pop Vocal Album",
+                    year: 2024,
+                    category: "grammy",
+                    description: "Won for 'Midnights'.",
+                    icon: "fa-music",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 3,
+                    title: "Album of the Year",
+                    year: 2021,
+                    category: "grammy",
+                    description: "Won for 'folklore', making Taylor the first woman to win Album of the Year three times.",
+                    icon: "fa-trophy",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 4,
+                    title: "Best Pop Solo Performance",
+                    year: 2021,
+                    category: "grammy",
+                    description: "Won for 'cardigan'.",
+                    icon: "fa-microphone",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 5,
+                    title: "Album of the Year",
+                    year: 2016,
+                    category: "grammy",
+                    description: "Won for '1989', making Taylor the first woman to win Album of the Year twice.",
+                    icon: "fa-trophy",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 6,
+                    title: "Best Pop Vocal Album",
+                    year: 2016,
+                    category: "grammy",
+                    description: "Won for '1989'.",
+                    icon: "fa-music",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 7,
+                    title: "Album of the Year",
+                    year: 2010,
+                    category: "grammy",
+                    description: "Won for 'Fearless', making Taylor the youngest artist ever to win Album of the Year at the time.",
+                    icon: "fa-trophy",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 8,
+                    title: "Best Country Album",
+                    year: 2010,
+                    category: "grammy",
+                    description: "Won for 'Fearless'.",
+                    icon: "fa-music",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 9,
+                    title: "Best Female Country Vocal Performance",
+                    year: 2010,
+                    category: "grammy",
+                    description: "Won for 'White Horse'.",
+                    icon: "fa-microphone",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 10,
+                    title: "Best Country Song",
+                    year: 2010,
+                    category: "grammy",
+                    description: "Won for 'White Horse'.",
+                    icon: "fa-music",
+                    iconColor: "text-secondary"
+                },
+                
+                // American Music Awards
+                {
+                    id: 11,
+                    title: "Artist of the Year",
+                    year: 2022,
+                    category: "ama",
+                    description: "Sixth time winning this award, setting a new record.",
+                    icon: "fa-star",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 12,
+                    title: "Favorite Pop/Rock Album",
+                    year: 2022,
+                    category: "ama",
+                    description: "Won for 'Midnights'.",
+                    icon: "fa-compact-disc",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 13,
+                    title: "Favorite Pop/Rock Female Artist",
+                    year: 2022,
+                    category: "ama",
+                    description: "Tenth time winning this award.",
+                    icon: "fa-user",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 14,
+                    title: "Artist of the Decade",
+                    year: 2019,
+                    category: "ama",
+                    description: "Honored for her achievements during the 2010s.",
+                    icon: "fa-calendar",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 15,
+                    title: "Artist of the Year",
+                    year: 2019,
+                    category: "ama",
+                    description: "Fifth time winning this award.",
+                    icon: "fa-star",
+                    iconColor: "text-secondary"
+                },
+                
+                // Billboard Music Awards
+                {
+                    id: 16,
+                    title: "Top Artist",
+                    year: 2023,
+                    category: "billboard",
+                    description: "Second time winning this award.",
+                    icon: "fa-trophy",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 17,
+                    title: "Top Female Artist",
+                    year: 2023,
+                    category: "billboard",
+                    description: "Third time winning this award.",
+                    icon: "fa-user",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 18,
+                    title: "Top Billboard 200 Artist",
+                    year: 2023,
+                    category: "billboard",
+                    description: "Third time winning this award.",
+                    icon: "fa-chart-line",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 19,
+                    title: "Top Billboard 200 Album",
+                    year: 2023,
+                    category: "billboard",
+                    description: "Won for 'Midnights'.",
+                    icon: "fa-compact-disc",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 20,
+                    title: "Woman of the Year",
+                    year: 2016,
+                    category: "billboard",
+                    description: "Third time winning this award, a record.",
+                    icon: "fa-venus",
+                    iconColor: "text-secondary"
+                },
+                
+                // MTV Video Music Awards
+                {
+                    id: 21,
+                    title: "Video of the Year",
+                    year: 2022,
+                    category: "vma",
+                    description: "Won for 'All Too Well: The Short Film'.",
+                    icon: "fa-video-camera",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 22,
+                    title: "Best Direction",
+                    year: 2022,
+                    category: "vma",
+                    description: "Won for 'All Too Well: The Short Film'.",
+                    icon: "fa-film",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 23,
+                    title: "Best Longform Video",
+                    year: 2022,
+                    category: "vma",
+                    description: "Won for 'All Too Well: The Short Film'.",
+                    icon: "fa-film",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 24,
+                    title: "Video of the Year",
+                    year: 2019,
+                    category: "vma",
+                    description: "Won for 'You Need to Calm Down'.",
+                    icon: "fa-video-camera",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 25,
+                    title: "Video of the Year",
+                    year: 2015,
+                    category: "vma",
+                    description: "Won for 'Bad Blood'.",
+                    icon: "fa-video-camera",
+                    iconColor: "text-secondary"
+                },
+                
+                // Country Music Association Awards
+                {
+                    id: 26,
+                    title: "Entertainer of the Year",
+                    year: 2011,
+                    category: "cma",
+                    description: "Youngest artist ever to win this award at the time.",
+                    icon: "fa-star",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 27,
+                    title: "Album of the Year",
+                    year: 2011,
+                    category: "cma",
+                    description: "Won for 'Speak Now'.",
+                    icon: "fa-compact-disc",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 28,
+                    title: "Entertainer of the Year",
+                    year: 2009,
+                    category: "cma",
+                    description: "First time winning this award.",
+                    icon: "fa-star",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 29,
+                    title: "Album of the Year",
+                    year: 2009,
+                    category: "cma",
+                    description: "Won for 'Fearless'.",
+                    icon: "fa-compact-disc",
+                    iconColor: "text-secondary"
+                },
+                {
+                    id: 30,
+                    title: "Female Vocalist of the Year",
+                    year: 2009,
+                    category: "cma",
+                    description: "First time winning this award.",
+                    icon: "fa-microphone",
+                    iconColor: "text-secondary"
+                }
+            ];
+            
+            // Render awards grid
+            const awardsGrid = document.getElementById('awards-grid');
+            
+            function renderAwards(awards) {
+                awardsGrid.innerHTML = '';
+                
+                awards.forEach((award, index) => {
+                    const delay = 100 * (index % 3); // Stagger animation delay
+                    
+                    const awardCard = document.createElement('div');
+                    awardCard.className = `award-card bg-white rounded-lg overflow-hidden shadow-lg p-6`;
+                    awardCard.setAttribute('data-category', award.category);
+                    awardCard.setAttribute('data-aos', 'fade-up');
+                    awardCard.setAttribute('data-aos-delay', delay.toString());
+                    
+                    awardCard.innerHTML = `
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
+                                    <i class="fa ${award.icon} ${award.iconColor} text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center mb-2">
+                                    <h3 class="text-xl font-bold">${award.title}</h3>
+                                    <span class="ml-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">${award.year}</span>
+                                </div>
+                                <p class="text-gray-600">${award.description}</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    awardsGrid.appendChild(awardCard);
+                });
+            }
+            
+            // Initial render
+            renderAwards(awardsData);
+            
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('filter-active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('filter-active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter awards
+                    let filteredAwards = awardsData;
+                    
+                    if (filterValue !== 'all') {
+                        filteredAwards = awardsData.filter(award => award.category === filterValue);
+                    }
+                    
+                    // Render filtered awards
+                    renderAwards(filteredAwards);
+                    
+                    // Reinitialize AOS for new elements
+                    setTimeout(() => {
+                        AOS.refresh();
+                    }, 100);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

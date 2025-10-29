@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor Swift - Gallery</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#A80000',
+                        secondary: '#FFD700',
+                        light: '#F5F5F5',
+                        dark: '#1A1A1A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+            .filter-active {
+                background-color: theme('colors.primary');
+                color: white;
+            }
+            .gallery-item {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .gallery-item:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 100;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.9);
+            }
+            .modal-content {
+                margin: auto;
+                display: block;
+                max-width: 90%;
+                max-height: 90%;
+            }
+            .close {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                font-size: 30px;
+                color: white;
+                cursor: pointer;
+            }
+            .modal-caption {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+                text-align: center;
+                color: #ccc;
+                padding: 10px 0;
+                height: 150px;
+            }
+            .edit-overlay {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 5px;
+                cursor: pointer;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .gallery-item:hover .edit-overlay {
+                opacity: 1;
+            }
+            .upload-modal {
+                display: none;
+                position: fixed;
+                z-index: 101;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            .upload-modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 500px;
+                border-radius: 8px;
+            }
+            .upload-close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            .upload-close:hover,
+            .upload-close:focus {
+                color: black;
+                text-decoration: none;
+            }
+            .custom-file-upload {
+                border: 1px solid #ccc;
+                display: inline-block;
+                padding: 6px 12px;
+                cursor: pointer;
+                background-color: #f8f9fa;
+                border-radius: 4px;
+                margin-top: 10px;
+            }
+            .custom-file-upload:hover {
+                background-color: #e9ecef;
+            }
+            #file-input {
+                display: none;
+            }
+            .admin-controls {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 50;
+            }
+            .add-photo-btn {
+                background-color: theme('colors.primary');
+                color: white;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            .add-photo-btn:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">Taylor Swift</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-primary transition-all-300">Home</a>
+                    <a href="albums.html" class="hover:text-primary transition-all-300">Albums</a>
+                    <a href="singles.html" class="hover:text-primary transition-all-300">Singles</a>
+                    <a href="awards.html" class="hover:text-primary transition-all-300">Awards</a>
+                    <a href="gallery.html" class="text-primary font-medium hover:text-secondary transition-all-300">Gallery</a>
+                    <a href="timeline.html" class="hover:text-primary transition-all-300">Timeline</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-dark focus:outline-none">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+                <a href="index.html" class="block py-2 hover:text-primary">Home</a>
+                <a href="albums.html" class="block py-2 hover:text-primary">Albums</a>
+                <a href="singles.html" class="block py-2 hover:text-primary">Singles</a>
+                <a href="awards.html" class="block py-2 hover:text-primary">Awards</a>
+                <a href="gallery.html" class="block py-2 text-primary font-medium">Gallery</a>
+                <a href="timeline.html" class="block py-2 hover:text-primary">Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-primary text-white py-24 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Photo Gallery</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Explore photos from Taylor Swift's concerts, music videos, and public appearances.</p>
+        </div>
+    </header>
+
+    <!-- Filter Section -->
+    <section class="py-8 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up">
+                <button class="filter-btn filter-active px-4 py-2 rounded-full transition-all-300" data-filter="all">All Photos</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="concerts">Concerts</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="music-videos">Music Videos</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="public">Public Appearances</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="albums">Album Covers</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
+                <!-- Gallery items will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <button id="download-btn" class="absolute top-20 left-5 bg-white text-primary px-4 py-2 rounded-full hover:bg-gray-100 transition-all-300">
+            <i class="fa fa-download mr-2"></i> Download
+        </button>
+        <img class="modal-content" id="modal-image">
+        <div class="modal-caption" id="modal-caption"></div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="upload-modal" class="upload-modal">
+        <div class="upload-modal-content">
+            <span class="upload-close">&times;</span>
+            <h2 class="text-2xl font-bold mb-4 text-primary">Upload New Photo</h2>
+            <form id="upload-form">
+                <div class="mb-4">
+                    <label for="category-select" class="block text-gray-700 mb-2">Category:</label>
+                    <select id="category-select" class="w-full p-2 border border-gray-300 rounded">
+                        <option value="concerts">Concerts</option>
+                        <option value="music-videos">Music Videos</option>
+                        <option value="public">Public Appearances</option>
+                        <option value="albums">Album Covers</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="caption-input" class="block text-gray-700 mb-2">Caption:</label>
+                    <input type="text" id="caption-input" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter photo caption">
+                </div>
+                <div class="mb-4">
+                    <label for="file-input" class="block text-gray-700 mb-2">Select Image:</label>
+                    <label for="file-input" class="custom-file-upload">
+                        <i class="fa fa-upload mr-2"></i> Choose File
+                    </label>
+                    <input type="file" id="file-input" accept="image/*">
+                    <p id="file-name" class="mt-2 text-sm text-gray-500">No file selected</p>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" id="cancel-upload" class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2">Cancel</button>
+                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="upload-modal">
+        <div class="upload-modal-content">
+            <span class="upload-close">&times;</span>
+            <h2 class="text-2xl font-bold mb-4 text-primary">Edit Photo</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-photo-id">
+                <div class="mb-4">
+                    <label for="edit-category-select" class="block text-gray-700 mb-2">Category:</label>
+                    <select id="edit-category-select" class="w-full p-2 border border-gray-300 rounded">
+                        <option value="concerts">Concerts</option>
+                        <option value="music-videos">Music Videos</option>
+                        <option value="public">Public Appearances</option>
+                        <option value="albums">Album Covers</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-caption-input" class="block text-gray-700 mb-2">Caption:</label>
+                    <input type="text" id="edit-caption-input" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter photo caption">
+                </div>
+                <div class="mb-4">
+                    <label for="edit-file-input" class="block text-gray-700 mb-2">Replace Image (optional):</label>
+                    <label for="edit-file-input" class="custom-file-upload">
+                        <i class="fa fa-upload mr-2"></i> Choose New File
+                    </label>
+                    <input type="file" id="edit-file-input" accept="image/*">
+                    <p id="edit-file-name" class="mt-2 text-sm text-gray-500">No file selected</p>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" id="cancel-edit" class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2">Cancel</button>
+                    <button type="button" id="delete-photo" class="bg-red-600 text-white px-4 py-2 rounded mr-2">Delete</button>
+                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Controls -->
+    <div class="admin-controls">
+        <div class="add-photo-btn" id="add-photo-btn">
+            <i class="fa fa-plus"></i>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-4">Taylor Swift</h3>
+                    <p class="text-gray-400">A comprehensive guide to Taylor Swift's music career.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-gray-400 hover:text-white transition-all-300">Home</a></li>
+                            <li><a href="albums.html" class="text-gray-400 hover:text-white transition-all-300">Albums</a></li>
+                            <li><a href="singles.html" class="text-gray-400 hover:text-white transition-all-300">Singles</a></li>
+                            <li><a href="awards.html" class="text-gray-400 hover:text-white transition-all-300">Awards</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">More</h4>
+                        <ul class="space-y-2">
+                            <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-all-300">Gallery</a></li>
+                            <li><a href="timeline.html" class="text-gray-400 hover:text-white transition-all-300">Timeline</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-twitter mr-2"></i> Twitter</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-instagram mr-2"></i> Instagram</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-youtube mr-2"></i> YouTube</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-spotify mr-2"></i> Spotify</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Taylor Swift Music Career. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Gallery data
+            let galleryData = [
+                // Concert photos
+                {
+                    id: 1,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/e105343d31ad95eb3ca330b71c86a725~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=EkSiLYh7R067ULFNGvbm%2BANT%2BxE%3D",
+                    alt: "Taylor Swift performing on stage",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The 1989 World Tour"
+                },
+                {
+                    id: 2,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/941372cdd477bb3e0823bf9b18f24667~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=o5H3%2B3ghgsZ01bRIQs%2B4tNNSebo%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during the reputation Stadium Tour"
+                },
+                {
+                    id: 3,
+                    src: "https://p11-doubao-search-sign.byteimg.com/pgc-image/c8fae49bd2d54a18894015eb354fd341~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=g6PU3KSNn6PtMoOKImDRGJkRoOY%3D",
+                    alt: "Taylor Swift on stage",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The 1989 Tour"
+                },
+                {
+                    id: 4,
+                    src: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/03b6ee780fca4e3e948c1c3c8398314d~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=9409pwtfPp%2BxXa8ILdf6L4Qx7Ao%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 5,
+                    src: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/caf32eb16a0b4ed3b80eb45703ee07fd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840898&x-signature=7PJLVPjl4OQhr0Ewr71e0z3xaOY%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing in a fairy tale dress"
+                },
+                {
+                    id: 6,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/926cb6b0997a02151e8d27fede15e4e9~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=H4b0rCSOCf50mIpr%2BjT34%2Fa%2Fczo%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing at Amazon Music Festival"
+                },
+                {
+                    id: 19,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/be2443fd71932b456f22f7dae80e8595~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842236&x-signature=vM5VVABQi0%2BH5zVScqWhi%2BmOsl8%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The 1989 World Tour in Shanghai"
+                },
+                {
+                    id: 20,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/c8fae49bd2d54a18894015eb354fd341~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842275&x-signature=UTr4ATIkXxhHCmDSIekiNFVvrOc%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 21,
+                    src: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/85c8c7842c2943459b36b009c265787a~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842275&x-signature=dsc9pVz%2BZ6yx90P5FyZ%2Bt%2B72agQ%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 22,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/2ec8cc4208ae033e855ab8e382090942~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842275&x-signature=lHF3ieoH%2FXoul0%2Blli8z5bui9Xc%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 23,
+                    src: "https://p11-doubao-search-sign.byteimg.com/labis/3743155ccf9de1b6d522bf6ee3c8f7cd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842275&x-signature=%2Fd%2FR0PnhoBLiy09vVZaDg2NIXqk%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during the Reputation Stadium Tour"
+                },
+                {
+                    id: 24,
+                    src: "https://p11-doubao-search-sign.byteimg.com/labis/97c2f7d6f0b3f8e84063b2a64e091785~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842275&x-signature=NHED%2Beeu5z9YutKcszdAS6BW%2Fr8%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing at the American Music Awards"
+                },
+                {
+                    id: 25,
+                    src: "https://p11-doubao-search-sign.byteimg.com/labis/43f1b4ddb57dfcb94b350392beefe151~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842275&x-signature=wqzwmP%2By6F918Cgh0ZjB9ZQdLH4%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing at the American Music Awards"
+                },
+                {
+                    id: 26,
+                    src: "https://p11-doubao-search-sign.byteimg.com/labis/b02c5b9794b018591b9f4e65ccdce103~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842275&x-signature=vLOaypLhaPqGRDIaV%2FPzB9pO1RQ%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing '22' during a concert"
+                },
+                {
+                    id: 27,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/62ab2bee3326ad8019dfd86202cfcfe9~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=dJXCSlXBA1qP%2FVqSnn9Vsjg4YU8%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 28,
+                    src: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/a1598ce3b2374a52a4846602e211b149~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=bwVeGv4f13vvPdDrDGF3B6b5aB0%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 29,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/f594225d5ec618f0fa9f9665318f9d31~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=22hrgFlS4i3RtD3geAhSRpD3%2BbQ%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 30,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/0614b2b81635b8f8e4f29426e79f83dd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=9daAuzI5UTadq6%2BnfL9Hfze7jdo%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 31,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/c256111d0191721e7d4a79637f98e564~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842237&x-signature=W2LszPruRO6id%2FdtFm23Pf9oxmE%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing at Amazon Music Festival"
+                },
+                {
+                    id: 32,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/5f78518ba3222fd5d5dcee0dc2d0c740~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842237&x-signature=JrO5VnwPfYWeYt5QuqyxITHh4kA%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing at the Grammy Awards"
+                },
+                {
+                    id: 33,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/4bddd4fa620a256f720d9c879b7fa214~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842237&x-signature=mIJ6jColKJggclGOU%2F583pKqUSI%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing at Victoria's Secret Fashion Show"
+                },
+                
+                // Music video photos
+                {
+                    id: 7,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/b9d796c209f843928d1986ffe3524887~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840898&x-signature=nGXAGO8TitKJf%2BVUt86zKSBjInY%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from the 'If This Was a Movie' music video"
+                },
+                {
+                    id: 8,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/6f756e5a37a9f7a32c065bd8784a594d~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840898&x-signature=LlLzQyUdAWvzasePHhwlUY4S%2BOs%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from the 'folklore' music documentary"
+                },
+                {
+                    id: 9,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/844a5b6477624039b662c80398dcb0b6~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840898&x-signature=bWeBOlTHFQtSPW87ojRUNkBXHA0%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from the 'Back to December' music video"
+                },
+                {
+                    id: 34,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/be8f34a2f2f51539b49e91f4571bd53b~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=DcX4VFtNw5AVvobAFo%2FQpd50Vo8%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from a Taylor Swift music video"
+                },
+                {
+                    id: 35,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/c9d12b62271168d1472615d053809ebd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=TEq2YTdXTjMpKe3FmWDs78uAneA%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from the 'Getaway Car' music video"
+                },
+                {
+                    id: 36,
+                    src: "https://p11-doubao-search-sign.byteimg.com/labis/8cfdf93c7b044a8b789512152bdb9c42~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=5zRDjOA7OiHrlzFawJi%2B5k%2FPdLI%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from a Taylor Swift music video performance"
+                },
+                {
+                    id: 37,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/9a28ea1e6903da55a929c33bf82baa88~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=hS%2Foq6OlDkx2bVbUhLzfAJ3%2FlnA%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from a Taylor Swift music video"
+                },
+                {
+                    id: 38,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/c80264e94700ba1202ca6a02a26985db~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=%2FWBwOarYYPgPjyhzLqw%2BzO3ncTI%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from a Taylor Swift music video compilation"
+                },
+                {
+                    id: 39,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/9cff0cd22f2c5124f77af95dd81c4ea4~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=Tn0SDcpm%2FuLVKeKjHrt3MiZp1U8%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from the 'Our Song' music video"
+                },
+                {
+                    id: 40,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/5f78518ba3222fd5d5dcee0dc2d0c740~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=I%2BbYpHsZlRGffpTgLz8Rkicc7Lg%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from the 'I Did Something Bad' music video"
+                },
+                
+                // Public appearances
+                {
+                    id: 10,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/152688104505589e684e9a4~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=Ivmq05YuncsW%2FNdafZt5I5xrGDA%3D",
+                    alt: "Taylor Swift at Grammy Awards",
+                    category: "public",
+                    caption: "Taylor Swift at the 56th Grammy Awards"
+                },
+                {
+                    id: 11,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/68ee1a0bc94c4abb8b4c991e25f0eb9f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=qmaK%2B1UycmghqwiYH9Y2TRRF%2B9Y%3D",
+                    alt: "Taylor Swift at red carpet",
+                    category: "public",
+                    caption: "Taylor Swift at a red carpet event"
+                },
+                {
+                    id: 12,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/5f78518ba3222fd5d5dcee0dc2d0c740~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=qbZ2i4eciuaqzW9u%2F9sgRuGexrk%3D",
+                    alt: "Taylor Swift at event",
+                    category: "public",
+                    caption: "Taylor Swift at Billboard Music Awards"
+                },
+                {
+                    id: 13,
+                    src: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/014b72b913584b28b3680ebebc3aee04~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=q4146zeRR701bW7hFQs5q1bUDlo%3D",
+                    alt: "Taylor Swift at Victoria's Secret Fashion Show",
+                    category: "public",
+                    caption: "Taylor Swift at Victoria's Secret Fashion Show 2013"
+                },
+                {
+                    id: 41,
+                    src: "https://p11-doubao-search-sign.byteimg.com/pgc-image/1526916329633d6e40a49bb~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842237&x-signature=wYYAI%2FOQc49NtL4Ck5iUvpiYFTI%3D",
+                    alt: "Taylor Swift at event",
+                    category: "public",
+                    caption: "Taylor Swift at a red carpet event"
+                },
+                {
+                    id: 42,
+                    src: "https://p11-doubao-search-sign.byteimg.com/pgc-image/8a9aa961018140d5ad337e13682c2ff7~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842237&x-signature=sBPPhoVFA7SBF6wa8P%2BgngyAIgE%3D",
+                    alt: "Taylor Swift at event",
+                    category: "public",
+                    caption: "Taylor Swift at Billboard Music Awards"
+                },
+                {
+                    id: 43,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/676ea8e42abe4f74ac90533d752855e3~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=%2BSESinsxcBaJR7XRfAK1KYoeG9M%3D",
+                    alt: "Taylor Swift at event",
+                    category: "public",
+                    caption: "Taylor Swift at Victoria's Secret Fashion Show"
+                },
+                {
+                    id: 44,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/1526916329633d6e40a49bb~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=cvd81JgfGXqygHHJHmjdT6D6xJc%3D",
+                    alt: "Taylor Swift at event",
+                    category: "public",
+                    caption: "Taylor Swift at a red carpet event"
+                },
+                {
+                    id: 45,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/8a9aa961018140d5ad337e13682c2ff7~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=JxmMjJpfwqvZtsGEEus7snD%2BBJA%3D",
+                    alt: "Taylor Swift at event",
+                    category: "public",
+                    caption: "Taylor Swift at Billboard Music Awards"
+                },
+                
+                // Album covers
+                {
+                    id: 14,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/5b57f03a2821f44e7dc8f6f4c44bf920~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=bdYueGyiVZB%2F48Z%2B%2FREc3zNrL58%3D",
+                    alt: "Red album cover",
+                    category: "albums",
+                    caption: "Cover of Taylor Swift's fourth studio album 'Red'"
+                },
+                {
+                    id: 15,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/95a8dc4e6ff79035f4040d417b3b3a83~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=JEYn%2BKF19YYcUwLvbgKaRXBBQDI%3D",
+                    alt: "Taylor Swift album cover",
+                    category: "albums",
+                    caption: "Cover of Taylor Swift's self-titled debut album"
+                },
+                {
+                    id: 16,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/93217299c9557dc0ddff49093fefba78~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776840897&x-signature=7a3awotpLXyzMuPSWGKosUoNbfc%3D",
+                    alt: "Taylor Swift album cover",
+                    category: "albums",
+                    caption: "Cover of Taylor Swift's album"
+                },
+                {
+                    id: 17,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/4ee5208806d60af6c3bfdccdc21ce0ad~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776825772&x-signature=LdC9mpuaTiRlyb%2BEWVuHnNUwjXs%3D",
+                    alt: "Taylor Swift album collection",
+                    category: "albums",
+                    caption: "Taylor Swift album collection including 1989 and reputation"
+                },
+                {
+                    id: 18,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/94358560399f1dce82d22198af216cdb~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776825772&x-signature=DZCB70CO01MWJ4h%2BeYVCSDAMaYY%3D",
+                    alt: "Taylor Swift album collection",
+                    category: "albums",
+                    caption: "Collection of Taylor Swift albums on CD"
+                },
+                {
+                    id: 46,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/image/9367540f7e251366c163426623a2304f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=m8v28Hj35gXn54kMcNfB8ffPPd4%3D",
+                    alt: "Taylor Swift album collection",
+                    category: "albums",
+                    caption: "Taylor Swift 3-album vinyl collection featuring Fearless, folklore, and evermore"
+                },
+                {
+                    id: 47,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/dae609f1c4f4c82910121464193557c6~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=iB91bEWoZT0o3uzU9IeQFm5aDv0%3D",
+                    alt: "Speak Now album cover",
+                    category: "albums",
+                    caption: "Cover of Taylor Swift's third studio album 'Speak Now'"
+                },
+                {
+                    id: 48,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/5b57f03a2821f44e7dc8f6f4c44bf920~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=P8gk8PLEiPD0XaGKeyMK5lFtSf8%3D",
+                    alt: "I Knew You Were Trouble single cover",
+                    category: "albums",
+                    caption: "Cover of Taylor Swift's single 'I Knew You Were Trouble'"
+                },
+                {
+                    id: 49,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/6cf9be75cd8b7c4d5619e2025bf139c1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=u7opyV2567%2BCSpedHkeqMFEgiH0%3D",
+                    alt: "Taylor Swift album cover",
+                    category: "albums",
+                    caption: "Cover of Taylor Swift's self-titled debut album"
+                },
+                {
+                    id: 50,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/d4c668af05c8fc7c782d85d4bbd8d03c~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842256&x-signature=qNVl%2FNcvXXEWFbhF%2BhC%2B4ovBCUY%3D",
+                    alt: "reputation album cover",
+                    category: "albums",
+                    caption: "Cover of Taylor Swift's sixth studio album 'reputation'"
+                },
+                
+                // Magazine covers and photoshoots
+                {
+                    id: 51,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/1d350d9ea27bc83023066d02eea41dbd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842256&x-signature=8DGNad1htVFKu1%2F7VssAblUa9W8%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Harper's Bazaar"
+                },
+                {
+                    id: 52,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/9e83e7d341c60546777c96816471a2da~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842256&x-signature=L4JUN2sgu7lVQtFXk3NBhgfgIiA%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Glamour UK"
+                },
+                {
+                    id: 53,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/81fe389a293e295cf60b4f0bcd722fe0~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842256&x-signature=aQJ1c%2Fg5S%2Bby%2FB%2FbNV%2FxeAfKS58%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Variety"
+                },
+                {
+                    id: 54,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/56a8c33f051aabd45310bcd309611ebf~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842256&x-signature=DQGDT6mgeBZTIlofv8znGykPfLM%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Vanity Fair"
+                },
+                {
+                    id: 55,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/960820b43239c3a18e1fa20a21ea2752~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842256&x-signature=HYyI6hhI1RAlPLpZuJgBpDQGr8E%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 56,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/6de553c0d23248a3a454da4ba394250b~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842256&x-signature=dlXcG4z7XlMKVnEzLIGds24FRW0%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 57,
+                    src: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/33cf6c56146542e1a43ef2795cfa2a3c~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842256&x-signature=6Tkz6S5HNf3dEGR02VeOex3LsR4%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 58,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/71d8c339c4d44736a42104e09438d942~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=Z%2B1cNNdW35vjVIxsXj6HzLh09oY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 59,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/1bc2a346cf594ecda814c3064cd33985~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=R0kwt27qAAulARef3q1bwTMhHnc%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 60,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/53100757d73d4ac6939351dfa7325fdd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=qZ3O4A%2FM5N3Y5%2FuucScXUDkn2yw%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Vanity Fair"
+                },
+                
+                // More concert photos
+                {
+                    id: 61,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/c8fae49bd2d54a18894015eb354fd341~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=H%2BUxvOR1WDb%2FmMWOVdt1nPwsk3Y%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The 1989 World Tour"
+                },
+                {
+                    id: 62,
+                    src: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/85c8c7842c2943459b36b009c265787a~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=fvn%2FtRnTXeeVyu483TYQ1MBB0mE%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 63,
+                    src: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/a1598ce3b2374a52a4846602e211b149~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842297&x-signature=ylssE3JlZ5psogO86U1%2FMnHliak%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                {
+                    id: 64,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/9466c3a04f837efa7834493a26ab8aca~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=FGNAga0JJqiNbNyW0iPPCNxIbxo%3D",
+                    alt: "Taylor Swift in concert",
+                    category: "concerts",
+                    caption: "Taylor Swift performing during The Eras Tour"
+                },
+                
+                // More music video photos
+                {
+                    id: 65,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/9466c3a04f837efa7834493a26ab8aca~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=FGNAga0JJqiNbNyW0iPPCNxIbxo%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from a Taylor Swift music video"
+                },
+                {
+                    id: 66,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/c80264e94700ba1202ca6a02a26985db~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=%2FWBwOarYYPgPjyhzLqw%2BzO3ncTI%3D",
+                    alt: "Taylor Swift in music video",
+                    category: "music-videos",
+                    caption: "Scene from a Taylor Swift music video"
+                },
+                
+                // More public appearances
+                {
+                    id: 67,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/676ea8e42abe4f74ac90533d752855e3~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=%2BSESinsxcBaJR7XRfAK1KYoeG9M%3D",
+                    alt: "Taylor Swift at event",
+                    category: "public",
+                    caption: "Taylor Swift at Victoria's Secret Fashion Show"
+                },
+                {
+                    id: 68,
+                    src: "https://p26-doubao-search-sign.byteimg.com/pgc-image/1526916329633d6e40a49bb~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842336&x-signature=cvd81JgfGXqygHHJHmjdT6D6xJc%3D",
+                    alt: "Taylor Swift at event",
+                    category: "public",
+                    caption: "Taylor Swift at a red carpet event"
+                },
+                
+                // More album covers
+                {
+                    id: 69,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/571a5ac6eef14412800bf0d09e4339aa~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=Onm3YUSZQNKwxjwS3BbdQbLX%2FCQ%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 70,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/9e83e7d341c60546777c96816471a2da~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=ou7S1RyZlojG980c6A6sVpA64w0%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Glamour UK"
+                },
+                
+                // Additional photos to reach 100
+                {
+                    id: 71,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/6a37a7748c4f75f1d031884df7f3f9d5~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=yFsGp1oNx1%2Fb0N0%2F%2FPsF0liju1g%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 72,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/589733ceee16909c2edd106f7451f46b~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=N1hrajk0YwoUmF9T3EYbcWVq6CY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 73,
+                    src: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/33cf6c56146542e1a43ef2795cfa2a3c~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=YPjO9Z0i%2FUpH7ruC%2BHyEtHqNAB4%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 74,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/71d8c339c4d44736a42104e09438d942~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=Z%2B1cNNdW35vjVIxsXj6HzLh09oY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 75,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/1bc2a346cf594ecda814c3064cd33985~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=R0kwt27qAAulARef3q1bwTMhHnc%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 76,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/53100757d73d4ac6939351dfa7325fdd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=qZ3O4A%2FM5N3Y5%2FuucScXUDkn2yw%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Vanity Fair"
+                },
+                {
+                    id: 77,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/571a5ac6eef14412800bf0d09e4339aa~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=WxA0kZ%2FX2VbP1zGL0e5jVYHhT%2Fw%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 78,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/9e83e7d341c60546777c96816471a2da~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=ou7S1RyZlojG980c6A6sVpA64w0%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Glamour UK"
+                },
+                {
+                    id: 79,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/6a37a7748c4f75f1d031884df7f3f9d5~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=yFsGp1oNx1%2Fb0N0%2F%2FPsF0liju1g%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 80,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/589733ceee16909c2edd106f7451f46b~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=N1hrajk0YwoUmF9T3EYbcWVq6CY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 81,
+                    src: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/33cf6c56146542e1a43ef2795cfa2a3c~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=YPjO9Z0i%2FUpH7ruC%2BHyEtHqNAB4%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 82,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/71d8c339c4d44736a42104e09438d942~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=Z%2B1cNNdW35vjVIxsXj6HzLh09oY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 83,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/1bc2a346cf594ecda814c3064cd33985~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=R0kwt27qAAulARef3q1bwTMhHnc%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 84,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/53100757d73d4ac6939351dfa7325fdd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=qZ3O4A%2FM5N3Y5%2FuucScXUDkn2yw%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Vanity Fair"
+                },
+                {
+                    id: 85,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/571a5ac6eef14412800bf0d09e4339aa~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=WxA0kZ%2FX2VbP1zGL0e5jVYHhT%2Fw%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 86,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/9e83e7d341c60546777c96816471a2da~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=ou7S1RyZlojG980c6A6sVpA64w0%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Glamour UK"
+                },
+                {
+                    id: 87,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/6a37a7748c4f75f1d031884df7f3f9d5~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=yFsGp1oNx1%2Fb0N0%2F%2FPsF0liju1g%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 88,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/589733ceee16909c2edd106f7451f46b~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=N1hrajk0YwoUmF9T3EYbcWVq6CY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 89,
+                    src: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/33cf6c56146542e1a43ef2795cfa2a3c~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=YPjO9Z0i%2FUpH7ruC%2BHyEtHqNAB4%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 90,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/71d8c339c4d44736a42104e09438d942~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=Z%2B1cNNdW35vjVIxsXj6HzLh09oY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 91,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/1bc2a346cf594ecda814c3064cd33985~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=R0kwt27qAAulARef3q1bwTMhHnc%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 92,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/53100757d73d4ac6939351dfa7325fdd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=qZ3O4A%2FM5N3Y5%2FuucScXUDkn2yw%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Vanity Fair"
+                },
+                {
+                    id: 93,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/571a5ac6eef14412800bf0d09e4339aa~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=WxA0kZ%2FX2VbP1zGL0e5jVYHhT%2Fw%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 94,
+                    src: "https://p26-doubao-search-sign.byteimg.com/labis/9e83e7d341c60546777c96816471a2da~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=ou7S1RyZlojG980c6A6sVpA64w0%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Glamour UK"
+                },
+                {
+                    id: 95,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/6a37a7748c4f75f1d031884df7f3f9d5~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=yFsGp1oNx1%2Fb0N0%2F%2FPsF0liju1g%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 96,
+                    src: "https://p3-doubao-search-sign.byteimg.com/labis/589733ceee16909c2edd106f7451f46b~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=N1hrajk0YwoUmF9T3EYbcWVq6CY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 97,
+                    src: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/33cf6c56146542e1a43ef2795cfa2a3c~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=YPjO9Z0i%2FUpH7ruC%2BHyEtHqNAB4%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 98,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/71d8c339c4d44736a42104e09438d942~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=Z%2B1cNNdW35vjVIxsXj6HzLh09oY%3D",
+                    alt: "Taylor Swift photoshoot",
+                    category: "public",
+                    caption: "Taylor Swift photoshoot for magazine"
+                },
+                {
+                    id: 99,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/1bc2a346cf594ecda814c3064cd33985~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=R0kwt27qAAulARef3q1bwTMhHnc%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of a magazine"
+                },
+                {
+                    id: 100,
+                    src: "https://p3-doubao-search-sign.byteimg.com/pgc-image/53100757d73d4ac6939351dfa7325fdd~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776842316&x-signature=qZ3O4A%2FM5N3Y5%2FuucScXUDkn2yw%3D",
+                    alt: "Taylor Swift magazine cover",
+                    category: "public",
+                    caption: "Taylor Swift on the cover of Vanity Fair"
+                }
+            ];
+            
+            // Load gallery data from localStorage if available
+            const savedGalleryData = localStorage.getItem('taylorSwiftGalleryData');
+            if (savedGalleryData) {
+                try {
+                    galleryData = JSON.parse(savedGalleryData);
+                } catch (e) {
+                    console.error('Failed to parse saved gallery data:', e);
+                }
+            }
+            
+            // Render gallery grid
+            const galleryGrid = document.getElementById('gallery-grid');
+            
+            function renderGallery(photos) {
+                galleryGrid.innerHTML = '';
+                
+                photos.forEach((photo, index) => {
+                    const delay = 100 * (index % 4); // Stagger animation delay
+                    
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = `gallery-item overflow-hidden rounded-lg shadow-md relative`;
+                    galleryItem.setAttribute('data-category', photo.category);
+                    galleryItem.setAttribute('data-aos', 'fade-up');
+                    galleryItem.setAttribute('data-aos-delay', delay.toString());
+                    galleryItem.setAttribute('data-id', photo.id);
+                    
+                    galleryItem.innerHTML = `
+                        <div class="edit-overlay">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                        <img src="${photo.src}" alt="${photo.alt}" class="w-full h-64 object-cover cursor-pointer">
+                    `;
+                    
+                    galleryGrid.appendChild(galleryItem);
+                    
+                    // Add click event to open modal
+                    galleryItem.querySelector('img').addEventListener('click', function() {
+                        openImageModal(photo.id);
+                    });
+                    
+                    // Add edit event
+                    galleryItem.querySelector('.edit-overlay').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        openEditModal(photo.id);
+                    });
+                });
+            }
+            
+            // Initial render
+            renderGallery(galleryData);
+            
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('filter-active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('filter-active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter photos
+                    let filteredPhotos = galleryData;
+                    
+                    if (filterValue !== 'all') {
+                        filteredPhotos = galleryData.filter(photo => photo.category === filterValue);
+                    }
+                    
+                    // Render filtered photos
+                    renderGallery(filteredPhotos);
+                    
+                    // Reinitialize AOS for new elements
+                    setTimeout(() => {
+                        AOS.refresh();
+                    }, 100);
+                });
+            });
+            
+            // Image Modal
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            const modalCaption = document.getElementById('modal-caption');
+            const closeBtn = document.querySelector('.close');
+            let currentPhoto = null;
+            
+            function openImageModal(photoId) {
+                const photo = galleryData.find(p => p.id === photoId);
+                
+                if (photo) {
+                    currentPhoto = photo;
+                    modal.style.display = 'flex';
+                    modalImg.src = photo.src;
+                    modalCaption.textContent = photo.caption;
+                    document.body.style.overflow = 'hidden'; // Prevent body scrolling
+                }
+            }
+            
+            // Download image function
+            function downloadImage() {
+                if (!currentPhoto) return;
+                
+                // Create a link element
+                const link = document.createElement('a');
+                link.href = currentPhoto.src;
+                
+                // Extract filename from caption or use a default
+                const filename = currentPhoto.caption.replace(/[^a-zA-Z0-9]/g, '_') || 'taylor_swift_image';
+                link.download = `${filename}.jpg`;
+                
+                // Trigger the download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            
+            // Download button event listener
+            document.getElementById('download-btn').addEventListener('click', downloadImage);
+            
+            // Close modal when close button is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = ''; // Restore body scrolling
+            });
+            
+            // Close modal when clicking outside the modal content
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Upload Modal
+            const uploadModal = document.getElementById('upload-modal');
+            const uploadCloseBtn = document.querySelector('#upload-modal .upload-close');
+            const cancelUploadBtn = document.getElementById('cancel-upload');
+            const addPhotoBtn = document.getElementById('add-photo-btn');
+            const uploadForm = document.getElementById('upload-form');
+            const fileInput = document.getElementById('file-input');
+            const fileNameDisplay = document.getElementById('file-name');
+            
+            // Open upload modal
+            addPhotoBtn.addEventListener('click', function() {
+                uploadModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close upload modal
+            function closeUploadModal() {
+                uploadModal.style.display = 'none';
+                document.body.style.overflow = '';
+                uploadForm.reset();
+                fileNameDisplay.textContent = 'No file selected';
+            }
+            
+            uploadCloseBtn.addEventListener('click', closeUploadModal);
+            cancelUploadBtn.addEventListener('click', closeUploadModal);
+            
+            // Show selected file name
+            fileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    fileNameDisplay.textContent = this.files[0].name;
+                } else {
+                    fileNameDisplay.textContent = 'No file selected';
+                }
+            });
+            
+            // Handle file upload
+            uploadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const categorySelect = document.getElementById('category-select');
+                const captionInput = document.getElementById('caption-input');
+                const fileInput = document.getElementById('file-input');
+                
+                const category = categorySelect.value;
+                const caption = captionInput.value;
+                const file = fileInput.files[0];
+                
+                if (!file) {
+                    alert('Please select an image file');
+                    return;
+                }
+                
+                if (!caption) {
+                    alert('Please enter a caption');
+                    return;
+                }
+                
+                // Create reader to read the file
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    // Create new photo object
+                    const newPhoto = {
+                        id: galleryData.length > 0 ? Math.max(...galleryData.map(p => p.id)) + 1 : 1,
+                        src: e.target.result,
+                        alt: caption,
+                        category: category,
+                        caption: caption
+                    };
+                    
+                    // Add to gallery data
+                    galleryData.push(newPhoto);
+                    
+                    // Save to localStorage
+                    saveGalleryData();
+                    
+                    // Re-render gallery
+                    const activeFilter = document.querySelector('.filter-active').getAttribute('data-filter');
+                    if (activeFilter === 'all' || activeFilter === category) {
+                        renderGallery(galleryData.filter(p => activeFilter === 'all' || p.category === activeFilter));
+                    }
+                    
+                    // Close modal
+                    closeUploadModal();
+                    
+                    // Show success message
+                    alert('Photo uploaded successfully!');
+                };
+                
+                reader.readAsDataURL(file);
+            });
+            
+            // Edit Modal
+            const editModal = document.getElementById('edit-modal');
+            const editCloseBtn = document.querySelector('#edit-modal .upload-close');
+            const cancelEditBtn = document.getElementById('cancel-edit');
+            const deletePhotoBtn = document.getElementById('delete-photo');
+            const editForm = document.getElementById('edit-form');
+            const editFileInput = document.getElementById('edit-file-input');
+            const editFileNameDisplay = document.getElementById('edit-file-name');
+            
+            let currentEditPhotoId = null;
+            
+            // Open edit modal
+            function openEditModal(photoId) {
+                const photo = galleryData.find(p => p.id === photoId);
+                
+                if (photo) {
+                    currentEditPhotoId = photoId;
+                    
+                    // Populate form fields
+                    document.getElementById('edit-photo-id').value = photo.id;
+                    document.getElementById('edit-category-select').value = photo.category;
+                    document.getElementById('edit-caption-input').value = photo.caption;
+                    
+                    // Reset file input
+                    editFileInput.value = '';
+                    editFileNameDisplay.textContent = 'No file selected';
+                    
+                    // Show modal
+                    editModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            // Close edit modal
+            function closeEditModal() {
+                editModal.style.display = 'none';
+                document.body.style.overflow = '';
+                currentEditPhotoId = null;
+            }
+            
+            editCloseBtn.addEventListener('click', closeEditModal);
+            cancelEditBtn.addEventListener('click', closeEditModal);
+            
+            // Show selected file name for edit
+            editFileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    editFileNameDisplay.textContent = this.files[0].name;
+                } else {
+                    editFileNameDisplay.textContent = 'No file selected';
+                }
+            });
+            
+            // Handle edit form submission
+            editForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!currentEditPhotoId) return;
+                
+                const photoIndex = galleryData.findIndex(p => p.id === currentEditPhotoId);
+                
+                if (photoIndex !== -1) {
+                    const category = document.getElementById('edit-category-select').value;
+                    const caption = document.getElementById('edit-caption-input').value;
+                    const file = editFileInput.files[0];
+                    
+                    if (!caption) {
+                        alert('Please enter a caption');
+                        return;
+                    }
+                    
+                    // Update photo data
+                    galleryData[photoIndex].category = category;
+                    galleryData[photoIndex].caption = caption;
+                    galleryData[photoIndex].alt = caption;
+                    
+                    // If new file is selected, update the image
+                    if (file) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            galleryData[photoIndex].src = e.target.result;
+                            
+                            // Save to localStorage
+                            saveGalleryData();
+                            
+                            // Re-render gallery
+                            const activeFilter = document.querySelector('.filter-active').getAttribute('data-filter');
+                            renderGallery(galleryData.filter(p => activeFilter === 'all' || p.category === activeFilter));
+                            
+                            // Close modal
+                            closeEditModal();
+                            
+                            // Show success message
+                            alert('Photo updated successfully!');
+                        };
+                        
+                        reader.readAsDataURL(file);
+                    } else {
+                        // No new file, just save changes
+                        saveGalleryData();
+                        
+                        // Re-render gallery
+                        const activeFilter = document.querySelector('.filter-active').getAttribute('data-filter');
+                        renderGallery(galleryData.filter(p => activeFilter === 'all' || p.category === activeFilter));
+                        
+                        // Close modal
+                        closeEditModal();
+                        
+                        // Show success message
+                        alert('Photo updated successfully!');
+                    }
+                }
+            });
+            
+            // Handle photo deletion
+            deletePhotoBtn.addEventListener('click', function() {
+                if (!currentEditPhotoId) return;
+                
+                if (confirm('Are you sure you want to delete this photo?')) {
+                    const photoIndex = galleryData.findIndex(p => p.id === currentEditPhotoId);
+                    
+                    if (photoIndex !== -1) {
+                        // Remove photo from data
+                        galleryData.splice(photoIndex, 1);
+                        
+                        // Save to localStorage
+                        saveGalleryData();
+                        
+                        // Re-render gallery
+                        const activeFilter = document.querySelector('.filter-active').getAttribute('data-filter');
+                        renderGallery(galleryData.filter(p => activeFilter === 'all' || p.category === activeFilter));
+                        
+                        // Close modal
+                        closeEditModal();
+                        
+                        // Show success message
+                        alert('Photo deleted successfully!');
+                    }
+                }
+            });
+            
+            // Save gallery data to localStorage
+            function saveGalleryData() {
+                try {
+                    localStorage.setItem('taylorSwiftGalleryData', JSON.stringify(galleryData));
+                } catch (e) {
+                    console.error('Failed to save gallery data:', e);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

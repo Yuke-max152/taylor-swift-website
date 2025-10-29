@@ -1,0 +1,1001 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor Swift - Albums</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#A80000',
+                        secondary: '#FFD700',
+                        light: '#F5F5F5',
+                        dark: '#1A1A1A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+            .album-card:hover .album-overlay {
+                opacity: 1;
+            }
+            .filter-active {
+                background-color: theme('colors.primary');
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a hrefhref="index.html" class="text-2xl font-bold text-primary">Taylor Swift</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-primary transition-all-300"></a>                 <a href="albums.html" class="text-primary font-medium hover:text-secondary transition-all-300">Albums</a>
+
+                    <a href="albums.html" class="text-primary font-medium hover:text-secondary transition-all-300">Albums</a>
+                    <a href="awards.html" class="hover:text-primary transition-all-300">Awards</a>
+                    <a ="gallery.html" class="hover:text-primary transition-all-300">Gallery</a>
+                    <a href="timeline.html" class="hover:text-primary transition-all-300">Timeline</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-dark focus:outline-none">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+                <a href="index.html" class="block py-2 hover:text-primary">Home</a>
+                <a href="albums.html" class="block py-2 text-primary font-medium">Albums</a>
+                <a href="awards.html" class="block py-2 hover:text-primary">Awards</a>
+                <a href="gallery.html" class="block py-2 hover:text-primary">Gallery</a>
+                <a href="timeline.html" class="block py-2 hover:text-primary">Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-primary text-white py-24 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Albums</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Explore Taylor Swift's discography, from her self-titled debut album to her latest releases.</p>
+        </div>
+    </header>
+
+    <!-- Filter Section -->
+    <section class="py-8 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up">
+                <button class="filter-btn filter-active px-4 py-2 rounded-full transition-all-300" data-filter="all">All Albums</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="studio">Studio Albums</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="taylors-version">Taylor's Versions</button>
+                <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="ep">EPs &amp; Mixtapes</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Albums Grid -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="albums-grid">
+                <!-- Album 1: Taylor Swift -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024110347.jpg" alt="Taylor Swift" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Taylor Swift</h3>
+                            <p class="text-white mb-4">Released: 2006</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="taylor-swift">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Taylor Swift</h3>
+                        <p class="text-gray-600 mb-4">Released: October 24, 2006</p>
+                        <p class="text-gray-700">Taylor's self-titled debut album featuring country hits like "Tim McGraw" and "Our Song."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 2: Fearless -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="150">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024110921.jpg" alt="Fearless" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Fearless</h3>
+                            <p class="text-white mb-4">Released: 2008</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="fearless">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Fearless</h3>
+                        <p class="text-gray-600 mb-4">Released: November 11, 2008</p>
+                        <p class="text-gray-700">Taylor's second studio album, winner of four Grammy Awards including Album of the Year.</p>
+                    </div>
+                </div>
+                
+                <!-- Album 3: Speak Now -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024110946.jpg" alt="Speak Now" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Speak Now</h3>
+                            <p class="text-white mb-4">Released: 2010</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="speak-now">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Speak Now</h3>
+                        <p class="text-gray-600 mb-4">Released: October 25, 2010</p>
+                        <p class="text-gray-700">Taylor's third studio album, written entirely by herself, featuring hits like "Mine" and "Mean."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 4: Red -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="250">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024111114.jpg" alt="Red" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Red</h3>
+                            <p class="text-white mb-4">Released: 2012</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="red">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Red</h3>
+                        <p class="text-gray-600 mb-4">Released: October 22, 2012</p>
+                        <p class="text-gray-700">Taylor's fourth studio album, featuring her first pop crossover hit "We Are Never Ever Getting Back Together."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 5: 1989 -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024110831.jpg" alt="1989" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">1989</h3>
+                            <p class="text-white mb-4">Released: 2014</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="1989">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">1989</h3>
+                        <p class="text-gray-600 mb-4">Released: October 27, 2014</p>
+                        <p class="text-gray-700">Taylor's fifth studio album and her first pop album, featuring hits like "Shake It Off" and "Blank Space."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 6: reputation -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="350">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024111149.jpg" alt="reputation" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">reputation</h3>
+                            <p class="text-white mb-4">Released: 2017</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="reputation">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">reputation</h3>
+                        <p class="text-gray-600 mb-4">Released: November 10, 2017</p>
+                        <p class="text-gray-700">Taylor's sixth studio album, featuring hits like "Look What You Made Me Do" and "Delicate."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 7: Lover -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="400">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024111221.jpg" alt="Lover" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Lover</h3>
+                            <p class="text-white mb-4">Released: 2019</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="lover">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Lover</h3>
+                        <p class="text-gray-600 mb-4">Released: August 23, 2019</p>
+                        <p class="text-gray-700">Taylor's seventh studio album, featuring hits like "ME!," "You Need to Calm Down," and "Lover."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 8: folklore -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="450">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024111413.jpg" alt="folklore" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">folklore</h3>
+                            <p class="text-white mb-4">Released: 2020</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="folklore">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">folklore</h3>
+                        <p class="text-gray-600 mb-4">Released: July 24, 2020</p>
+                        <p class="text-gray-700">Taylor's eighth studio album, a surprise release featuring indie folk and alternative elements.</p>
+                    </div>
+                </div>
+                
+                <!-- Album 9: evermore -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="500">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024111452.jpg" alt="evermore" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">evermore</h3>
+                            <p class="text-white mb-4">Released: 2020</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="evermore">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">evermore</h3>
+                        <p class="text-gray-600 mb-4">Released: December 11, 2020</p>
+                        <p class="text-gray-700">Taylor's ninth studio album, described as a "sister record" to folklore.</p>
+                    </div>
+                </div>
+                
+                <!-- Album 10: Fearless (Taylor's Version) -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="taylors-version" data-aos="fade-up" data-aos-delay="550">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024111530.jpg" alt="Fearless (Taylor's Version)" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Fearless (Taylor's Version)</h3>
+                            <p class="text-white mb-4">Released: 2021</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="fearless-taylors-version">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Fearless (Taylor's Version)</h3>
+                        <p class="text-gray-600 mb-4">Released: April 9, 2021</p>
+                        <p class="text-gray-700">The first re-recorded album by Taylor, featuring re-recorded versions of Fearless plus six new tracks.</p>
+                    </div>
+                </div>
+                
+                <!-- Album 11: Red (Taylor's Version) -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="taylors-version" data-aos="fade-up" data-aos-delay="600">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024111535.jpg" alt="Red (Taylor's Version)" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Red (Taylor's Version)</h3>
+                            <p class="text-white mb-4">Released: 2021</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="red-taylors-version">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Red (Taylor's Version)</h3>
+                        <p class="text-gray-600 mb-4">Released: November 12, 2021</p>
+                        <p class="text-gray-700">The second re-recorded album by Taylor, featuring the 10-minute version of "All Too Well."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 12: Midnights -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="650">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024112250.jpg" alt="Midnights" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Midnights</h3>
+                            <p class="text-white mb-4">Released: 2022</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="midnights">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Midnights</h3>
+                        <p class="text-gray-600 mb-4">Released: October 21, 2022</p>
+                        <p class="text-gray-700">Taylor's tenth studio album, featuring hits like "Anti-Hero" and "Bejeweled."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 12: Speak Now (Taylor's Version) -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="taylors-version" data-aos="fade-up" data-aos-delay="650">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024144842.jpg" alt="Speak Now (Taylor's Version)" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">Speak Now (Taylor's Version)</h3>
+                            <p class="text-white mb-4">Released: 2023</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="speak-now-taylors-version">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Speak Now (Taylor's Version)</h3>
+                        <p class="text-gray-600 mb-4">Released: July 7, 2023</p>
+                        <p class="text-gray-700">The re-recorded version of Taylor's third studio album, featuring 6 "From the Vault" tracks.</p>
+                    </div>
+                </div>
+                
+                <!-- Album 13: 1989 (Taylor's Version) -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="taylors-version" data-aos="fade-up" data-aos-delay="700">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024144852.jpg" alt="1989 (Taylor's Version)" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">1989 (Taylor's Version)</h3>
+                            <p class="text-white mb-4">Released: 2023</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="1989-taylors-version">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">1989 (Taylor's Version)</h3>
+                        <p class="text-gray-600 mb-4">Released: October 27, 2023</p>
+                        <p class="text-gray-700">The re-recorded version of Taylor's fifth studio album, featuring 5 "From the Vault" tracks.</p>
+                    </div>
+                </div>
+                
+                <!-- Album 14: The Tortured Poets Department -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="750">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024144906.jpg" alt="The Tortured Poets Department" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">The Tortured Poets Department</h3>
+                            <p class="text-white mb-4">Released: 2024</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="the-tortured-poets-department">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">The Tortured Poets Department</h3>
+                        <p class="text-gray-600 mb-4">Released: April 19, 2024</p>
+                        <p class="text-gray-700">Taylor's 11th studio album, featuring hits like "Fortnight" with Post Malone and "I Can Do It With a Broken Heart."</p>
+                    </div>
+                </div>
+                
+                <!-- Album 15: The Life of a Showgirl -->
+                <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="studio" data-aos="fade-up" data-aos-delay="800">
+                    <div class="relative">
+                        <img src="images/微信图片_20251024144910.jpg" alt="The Life of a Showgirl" class="w-full h-64 object-cover">
+                        <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                            <h3 class="text-xl font-bold text-white mb-2">The Life of a Showgirl</h3>
+                            <p class="text-white mb-4">Released: 2025</p>
+                            <button class="album-details-btn bg-white text-primary font-bold py-2 px-4 rounded-full text-sm" data-album="the-life-of-a-showgirl">View Details</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">The Life of a Showgirl</h3>
+                        <p class="text-gray-600 mb-4">Released: October 3, 2025</p>
+                        <p class="text-gray-700">Taylor's 12th studio album, featuring the title track with Sabrina Carpenter and "The Fate of Ophelia."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Album Details Modal -->
+    <div id="album-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 id="modal-title" class="text-3xl font-bold text-primary"></h2>
+                    <button id="close-modal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i class="fa fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <div id="modal-content" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Content will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-4">Taylor Swift</h3>
+                    <p class="text-gray-400">A comprehensive guide to Taylor Swift's music career.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-gray-400 hover:text-white transition-all-300">Home</a></li>
+                            <li><a href="albums.html" class="text-gray-400 hover:text-white transition-all-300">Albums</a></li>
+                            
+                            <li><a href="awards.html" class="text-gray-400 hover:text-white transition-all-300">Awards</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">More</h4>
+                        <ul class="space-y-2">
+                            <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-all-300">Gallery</a></li>
+                            <li><a href="timeline.html" class="text-gray-400 hover:text-white transition-all-300">Timeline</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-twitter mr-2"></i> Twitter</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-instagram mr-2"></i> Instagram</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-youtube mr-2"></i> YouTube</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300"><i class="fa fa-spotify mr-2"></i> Spotify</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2025 Taylor Swift Music Career. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Album Filter Functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const albumCards = document.querySelectorAll('.album-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('filter-active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('filter-active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide album cards based on filter
+                    albumCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            // Add animation
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Album Details Modal
+            const albumDetailsButtons = document.querySelectorAll('.album-details-btn');
+            const albumModal = document.getElementById('album-modal');
+            const closeModal = document.getElementById('close-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            
+            // Album data
+            const albumData = {
+                'taylor-swift': {
+                    title: 'Taylor Swift',
+                    releaseDate: 'October 24, 2006',
+                    genre: 'Country',
+                    label: 'Big Machine Records',
+                    producer: 'Nathan Chapman',
+                    cover: 'images/微信图片_20251024110347.jpg',
+                    tracks: [
+                        'Tim McGraw',
+                        'Picture to Burn',
+                        'Teardrops on My Guitar',
+                        'A Place in This World',
+                        'Cold as You',
+                        'The Outside',
+                        'Tied Together with a Smile',
+                        'Stay Beautiful',
+                        'Should\'ve Said No',
+                        'Mary\'s Song (Oh My My My)',
+                        'Our Song'
+                    ],
+                    description: 'Taylor Swift is the debut studio album by American singer-songwriter Taylor Swift, released on October 24, 2006, by Big Machine Records. Swift was 16 years old at the time of the album\'s release. The album peaked at number five on the Billboard 200 and spent 24 weeks at number one on the Billboard Top Country Albums chart. It was certified seven times platinum by the Recording Industry Association of America (RIAA) for selling over seven million copies in the United States.'
+                },
+                'fearless': {
+                    title: 'Fearless',
+                    releaseDate: 'November 11, 2008',
+                    genre: 'Country pop',
+                    label: 'Big Machine Records',
+                    producer: 'Nathan Chapman, Taylor Swift',
+                    cover: 'images/微信图片_20251024110921.jpg',
+                    tracks: [
+                        'Fearless',
+                        'Fifteen',
+                        'Love Story',
+                        'Hey Stephen',
+                        'White Horse',
+                        'You Belong with Me',
+                        'Breathe (featuring Colbie Caillat)',
+                        'Tell Me Why',
+                        'You\'re Not Sorry',
+                        'The Way I Loved You',
+                        'Forever & Always',
+                        'The Best Day',
+                        'Change'
+                    ],
+                    description: 'Fearless is the second studio album by American singer-songwriter Taylor Swift. It was released on November 11, 2008, by Big Machine Records. The album won four Grammy Awards in 2010, including Album of the Year, making Swift the youngest artist ever to win the award at the time. Fearless spent 11 weeks at number one on the Billboard 200 and was certified diamond by the RIAA in 2017 for selling over 10 million copies in the United States.'
+                },
+                'speak-now': {
+                    title: 'Speak Now',
+                    releaseDate: 'October 25, 2010',
+                    genre: 'Country pop',
+                    label: 'Big Machine Records',
+                    producer: 'Taylor Swift, Nathan Chapman',
+                    cover: 'images/微信图片_20251024110946.jpg',
+                    tracks: [
+                        'Mine',
+                        'Sparks Fly',
+                        'Back to December',
+                        'Speak Now',
+                        'Dear John',
+                        'Mean',
+                        'The Story of Us',
+                        'Never Grow Up',
+                        'Enchanted',
+                        'Better Than Revenge',
+                        'Innocent',
+                        'Haunted',
+                        'Last Kiss',
+                        'Long Live'
+                    ],
+                    description: 'Speak Now is the third studio album by American singer-songwriter Taylor Swift. It was released on October 25, 2010, by Big Machine Records. Swift wrote all 14 tracks by herself. The album debuted at number one on the Billboard 200 with first-week sales of 1,047,000 copies, making it the 16th album in U.S. history to sell one million copies in a single week. Speak Now was certified six times platinum by the RIAA.'
+                },
+                'red': {
+                    title: 'Red',
+                    releaseDate: 'October 22, 2012',
+                    genre: 'Country pop, pop, rock',
+                    label: 'Big Machine Records',
+                    producer: 'Taylor Swift, Nathan Chapman, Dann Huff, Max Martin, Shellback',
+                    cover: 'images/微信图片_20251024111114.jpg',
+                    tracks: [
+                        'State of Grace',
+                        'Red',
+                        'Treacherous',
+                        'I Knew You Were Trouble',
+                        'All Too Well',
+                        '22',
+                        'I Almost Do',
+                        'We Are Never Ever Getting Back Together',
+                        'Stay Stay Stay',
+                        'The Last Time (featuring Gary Lightbody)',
+                        'Holy Ground',
+                        'Sad Beautiful Tragic',
+                        'The Lucky One',
+                        'Everything Has Changed (featuring Ed Sheeran)',
+                        'Starlight',
+                        'Begin Again'
+                    ],
+                    description: 'Red is the fourth studio album by American singer-songwriter Taylor Swift. It was released on October 22, 2012, by Big Machine Records. The album features collaborations with Max Martin and Shellback, marking Swift\'s first time working with producers outside of country music. Red debuted at number one on the Billboard 200 with first-week sales of 1,208,000 copies. It was certified seven times platinum by the RIAA and was ranked at number 99 on Rolling Stone\'s 2020 list of the 500 greatest albums of all time.'
+                },
+                '1989': {
+                    title: '1989',
+                    releaseDate: 'October 27, 2014',
+                    genre: 'Pop, synth-pop',
+                    label: 'Big Machine Records',
+                    producer: 'Taylor Swift, Max Martin, Shellback, Ryan Tedder, Greg Kurstin',
+                    cover: 'images/微信图片_20251024110831.jpg',
+                    tracks: [
+                        'Welcome to New York',
+                        'Blank Space',
+                        'Style',
+                        'Out of the Woods',
+                        'All You Had to Do Was Stay',
+                        'Shake It Off',
+                        'I Wish You Would',
+                        'Bad Blood',
+                        'Wildest Dreams',
+                        'How You Get the Girl',
+                        'This Love',
+                        'I Know Places',
+                        'Clean'
+                    ],
+                    description: '1989 is the fifth studio album by American singer-songwriter Taylor Swift. It was released on October 27, 2014, by Big Machine Records. Named after Swift\'s birth year, the album represents a departure from her country roots, marking a transition to pop music. 1989 debuted at number one on the Billboard 200 with first-week sales of 1,287,000 copies, making it the best-selling album of 2014 in the United States. It won three Grammy Awards in 2016, including Album of the Year, making Swift the first woman to win the award twice as a lead artist.'
+                },
+                'reputation': {
+                    title: 'reputation',
+                    releaseDate: 'November 10, 2017',
+                    genre: 'Pop, electropop, R&B',
+                    label: 'Big Machine Records',
+                    producer: 'Taylor Swift, Max Martin, Shellback, Jack Antonoff, Greg Kurstin',
+                    cover: 'images/微信图片_20251024111149.jpg',
+                    tracks: [
+                        '...Ready for It?',
+                        'End Game (featuring Ed Sheeran and Future)',
+                        'I Did Something Bad',
+                        'Don\'t Blame Me',
+                        'Delicate',
+                        'Look What You Made Me Do',
+                        'So It Goes...',
+                        'Gorgeous',
+                        'Getaway Car',
+                        'King of My Heart',
+                        'Dancing with Our Hands Tied',
+                        'Dress',
+                        'This Is Why We Can\'t Have Nice Things',
+                        'Call It What You Want',
+                        'New Year\'s Day'
+                    ],
+                    description: 'reputation is the sixth studio album by American singer-songwriter Taylor Swift. It was released on November 10, 2017, by Big Machine Records. The album is a departure from the synth-pop sound of 1989, incorporating elements of electropop, R&B, and hip hop. reputation debuted at number one on the Billboard 200 with first-week sales of 1,238,000 copies, making it the best-selling album of 2017 in the United States. It was certified three times platinum by the RIAA.'
+                },
+                'lover': {
+                    title: 'Lover',
+                    releaseDate: 'August 23, 2019',
+                    genre: 'Pop, synth-pop, electropop',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Jack Antonoff, Joel Little, Louis Bell, Frank Dukes',
+                    cover: 'images/微信图片_20251024111221.jpg',
+                    tracks: [
+                        'I Forgot That You Existed',
+                        'Cruel Summer',
+                        'Lover',
+                        'The Man',
+                        'The Archer',
+                        'I Think He Knows',
+                        'Miss Americana & the Heartbreak Prince',
+                        'Paper Rings',
+                        'Cornelia Street',
+                        'Death by a Thousand Cuts',
+                        'London Boy',
+                        'Soon You\'ll Get Better (featuring Dixie Chicks)',
+                        'False God',
+                        'You Need to Calm Down',
+                        'Afterglow',
+                        'ME! (featuring Brendon Urie of Panic! at the Disco)',
+                        'It\'s Nice to Have a Friend',
+                        'Daylight'
+                    ],
+                    description: 'Lover is the seventh studio album by American singer-songwriter Taylor Swift. It was released on August 23, 2019, by Republic Records, marking Swift\'s first album release after leaving Big Machine Records. The album is a return to the bright pop sound of 1989 after the darker tones of reputation. Lover debuted at number one on the Billboard 200 with first-week sales of 867,000 copies. It was certified two times platinum by the RIAA and received three Grammy Award nominations.'
+                },
+                'folklore': {
+                    title: 'folklore',
+                    releaseDate: 'July 24, 2020',
+                    genre: 'Indie folk, alternative rock, chamber pop',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Aaron Dessner, Jack Antonoff, Joe Alwyn',
+                    cover: 'images/微信图片_20251024111413.jpg',
+                    tracks: [
+                        'the 1',
+                        'cardigan',
+                        'the last great american dynasty',
+                        'exile (featuring Bon Iver)',
+                        'my tears ricochet',
+                        'mirrorball',
+                        'seven',
+                        'august',
+                        'this is me trying',
+                        'illicit affairs',
+                        'invisible string',
+                        'mad woman',
+                        'epiphany',
+                        'betty',
+                        'peace',
+                        'hoax'
+                    ],
+                    description: 'folklore is the eighth studio album by American singer-songwriter Taylor Swift. It was surprise-released on July 24, 2020, by Republic Records. The album marks a departure from Swift\'s previous pop sound, incorporating indie folk, alternative rock, and chamber pop elements. folklore debuted at number one on the Billboard 200 with first-week sales of 846,000 copies. It won the Grammy Award for Album of the Year in 2021, making Swift the first woman to win the award three times.'
+                },
+                'evermore': {
+                    title: 'evermore',
+                    releaseDate: 'December 11, 2020',
+                    genre: 'Indie folk, alternative rock, chamber pop',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Aaron Dessner, Jack Antonoff, Joe Alwyn',
+                    cover: 'images/微信图片_20251024111452.jpg',
+                    tracks: [
+                        'willow',
+                        'champagne problems',
+                        'gold rush',
+                        'tis the damn season',
+                        'tolerate it',
+                        'no body, no crime (featuring HAIM)',
+                        'happiness',
+                        'dorothea',
+                        'coney island (featuring The National)',
+                        'ivy',
+                        'cowboy like me',
+                        'long story short',
+                        'marjorie',
+                        'closure',
+                        'evermore (featuring Bon Iver)'
+                    ],
+                    description: 'evermore is the ninth studio album by American singer-songwriter Taylor Swift. It was surprise-released on December 11, 2020, by Republic Records, five months after the release of her eighth studio album, folklore. Swift described evermore as a "sister record" to folklore. The album debuted at number one on the Billboard 200, making Swift the first woman to have two number-one albums in the same year. evermore received a Grammy Award nomination for Album of the Year in 2022.'
+                },
+                'fearless-taylors-version': {
+                    title: 'Fearless (Taylor\'s Version)',
+                    releaseDate: 'April 9, 2021',
+                    genre: 'Country pop',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Nathan Chapman',
+                    cover: 'images/微信图片_20251024111530.jpg',
+                    tracks: [
+                        'Fearless (Taylor\'s Version)',
+                        'Fifteen (Taylor\'s Version)',
+                        'Love Story (Taylor\'s Version)',
+                        'Hey Stephen (Taylor\'s Version)',
+                        'White Horse (Taylor\'s Version)',
+                        'You Belong with Me (Taylor\'s Version)',
+                        'Breathe (Taylor\'s Version) [featuring Colbie Caillat]',
+                        'Tell Me Why (Taylor\'s Version)',
+                        'You\'re Not Sorry (Taylor\'s Version)',
+                        'The Way I Loved You (Taylor\'s Version)',
+                        'Forever & Always (Taylor\'s Version)',
+                        'The Best Day (Taylor\'s Version)',
+                        'Change (Taylor\'s Version)',
+                        'Jump Then Fall (Taylor\'s Version)',
+                        'Untouchable (Taylor\'s Version)',
+                        'Forever & Always (Piano Version) (Taylor\'s Version)',
+                        'Come in with the Rain (Taylor\'s Version)',
+                        'SuperStar (Taylor\'s Version)',
+                        'The Other Side of the Door (Taylor\'s Version)',
+                        'Today Was a Fairytale (Taylor\'s Version)',
+                        'You All Over Me (Taylor\'s Version) [From The Vault] [featuring Maren Morris]',
+                        'Mr. Perfectly Fine (Taylor\'s Version) [From The Vault]',
+                        'We Were Happy (Taylor\'s Version) [From The Vault]',
+                        'That\'s When (Taylor\'s Version) [From The Vault] [featuring Keith Urban]',
+                        'Don\'t You (Taylor\'s Version) [From The Vault]',
+                        'Bye Bye Baby (Taylor\'s Version) [From The Vault]'
+                    ],
+                    description: 'Fearless (Taylor\'s Version) is the first re-recorded album by American singer-songwriter Taylor Swift, released on April 9, 2021, by Republic Records. It is a re-recording of Swift\'s second studio album, Fearless (2008), and the first in a series of re-recorded albums Swift plans to release in order to regain control of her master recordings. The album includes re-recorded versions of all 13 tracks from the original album, as well as six additional tracks "from the vault" that were written but not included on the original release. Fearless (Taylor\'s Version) debuted at number one on the Billboard 200, making Swift the first woman to have three number-one albums in less than a year.'
+                },
+                'red-taylors-version': {
+                    title: 'Red (Taylor\'s Version)',
+                    releaseDate: 'November 12, 2021',
+                    genre: 'Country pop, pop, rock',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Nathan Chapman, Dann Huff, Max Martin, Shellback',
+                    cover: 'images/微信图片_20251024111535.jpg',
+                    tracks: [
+                        'State of Grace (Taylor\'s Version)',
+                        'Red (Taylor\'s Version)',
+                        'Treacherous (Taylor\'s Version)',
+                        'I Knew You Were Trouble (Taylor\'s Version)',
+                        'All Too Well (Taylor\'s Version)',
+                        '22 (Taylor\'s Version)',
+                        'I Almost Do (Taylor\'s Version)',
+                        'We Are Never Ever Getting Back Together (Taylor\'s Version)',
+                        'Stay Stay Stay (Taylor\'s Version)',
+                        'The Last Time (Taylor\'s Version) [featuring Gary Lightbody]',
+                        'Holy Ground (Taylor\'s Version)',
+                        'Sad Beautiful Tragic (Taylor\'s Version)',
+                        'The Lucky One (Taylor\'s Version)',
+                        'Everything Has Changed (Taylor\'s Version) [featuring Ed Sheeran]',
+                        'Starlight (Taylor\'s Version)',
+                        'Begin Again (Taylor\'s Version)',
+                        'The Moment I Knew (Taylor\'s Version)',
+                        'Come Back... Be Here (Taylor\'s Version)',
+                        'Girl at Home (Taylor\'s Version)',
+                        'Ronan (Taylor\'s Version)',
+                        'Better Man (Taylor\'s Version) [From The Vault]',
+                        'Nothing New (Taylor\'s Version) [From The Vault] [featuring Phoebe Bridgers]',
+                        'Babe (Taylor\'s Version) [From The Vault]',
+                        'Message in a Bottle (Taylor\'s Version) [From The Vault]',
+                        'I Bet You Think About Me (Taylor\'s Version) [From The Vault] [featuring Chris Stapleton]',
+                        'Forever Winter (Taylor\'s Version) [From The Vault]',
+                        'Run (Taylor\'s Version) [From The Vault] [featuring Ed Sheeran]',
+                        'The Very First Night (Taylor\'s Version) [From The Vault]',
+                        'All Too Well (10 Minute Version) (Taylor\'s Version) [From The Vault]'
+                    ],
+                    description: 'Red (Taylor\'s Version) is the second re-recorded album by American singer-songwriter Taylor Swift, released on November 12, 2021, by Republic Records. It is a re-recording of Swift\'s fourth studio album, Red (2012), and the second in a series of re-recorded albums. The album includes re-recorded versions of all 16 tracks from the original album, as well as 13 additional tracks "from the vault" that were written but not included on the original release. The album features the 10-minute version of "All Too Well," which was released as a single and accompanied by a short film directed by Swift. Red (Taylor\'s Version) debuted at number one on the Billboard 200 with first-week sales of 605,000 copies.'
+                },
+                'midnights': {
+                    title: 'Midnights',
+                    releaseDate: 'October 21, 2022',
+                    genre: 'Pop, synth-pop, electropop',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Jack Antonoff, Max Martin, Shellback, Jahaan Sweet',
+                    cover: 'images/微信图片_20251024112250.jpg',
+                    tracks: [
+                        'Lavender Haze',
+                        'Maroon',
+                        'Anti-Hero',
+                        'Snow on the Beach (featuring Lana Del Rey)',
+                        'You\'re on Your Own, Kid',
+                        'Midnight Rain',
+                        'Question...?',
+                        'Vigilante Shit',
+                        'Bejeweled',
+                        'Labyrinth',
+                        'Karma',
+                        'Sweet Nothing',
+                        'Mastermind'
+                    ],
+                    description: 'Midnights is the tenth studio album by American singer-songwriter Taylor Swift. It was released on October 21, 2022, by Republic Records. The album marks a return to pop music after Swift\'s folk-inspired albums folklore and evermore. Midnights consists of 13 tracks, with Swift describing it as "the stories of 13 sleepless nights scattered throughout my life." The album debuted at number one on the Billboard 200 with first-week sales of 1,578,000 copies, making it the best-selling album of 2022 in the United States. It won four Grammy Awards in 2024, including Album of the Year, making Swift the first artist to win the award four times.'
+                },
+                'speak-now-taylors-version': {
+                    title: 'Speak Now (Taylor\'s Version)',
+                    releaseDate: 'July 7, 2023',
+                    genre: 'Country pop',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Nathan Chapman',
+                    cover: 'images/微信图片_20251024144842.jpg',
+                    tracks: [
+                        'Mine (Taylor\'s Version)',
+                        'Sparks Fly (Taylor\'s Version)',
+                        'Back to December (taylor\'s Version)',
+                        'Speak Now (taylor\'s Version)',
+                        'Dear John (taylor\'s Version)',
+                        'Mean (taylor\'s Version)',
+                        'The Story of Us (taylor\'s Version)',
+                        'Never Grow Up (taylor\'s Version)',
+                        'Enchanted (taylor\'s Version)',
+                        'Better Than Revenge (taylor\'s Version)',
+                        'Innocent (taylor\'s Version)',
+                        'Haunted (taylor\'s Version)',
+                        'Last Kiss (taylor\'s Version)',
+                        'Long Live (taylor\'s Version)',
+                        'Electric Touch (taylor\'s Version) [From The Vault] [featuring Fall Out Boy]',
+                        'When Emma Falls in Love (taylor\'s Version) [From The Vault]',
+                        'I Can See You (taylor\'s Version) [From The Vault]',
+                        'Castles Crumbling (taylor\'s Version) [From The Vault] [featuring Hayley Williams]',
+                        'Foolish One (taylor\'s Version) [From The Vault]',
+                        'Timeless (taylor\'s Version) [From The Vault]'
+                    ],
+                    description: 'Speak Now (Taylor\'s Version) is the third re-recorded album by American singer-songwriter Taylor Swift, released on July 7, 2023, by Republic Records. It is a re-recording of Swift\'s third studio album, Speak Now (2010), and the third in a series of re-recorded albums. The album includes re-recorded versions of all 14 tracks from the original album, as well as 6 additional tracks "from the vault" that were written but not included on the original release. Speak Now (Taylor\'s Version) debuted at number one on the Billboard 200 with first-week sales of 716,000 copies.'
+                },
+                '1989-taylors-version': {
+                    title: '1989 (Taylor\'s Version)',
+                    releaseDate: 'October 27, 2023',
+                    genre: 'Pop, synth-pop',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Max Martin, Shellback, Ryan Tedder, Greg Kurstin',
+                    cover: 'images/微信图片_20251024144852.jpg',
+                    tracks: [
+                        'Welcome to New York (taylor\'s Version)',
+                        'Blank Space (taylor\'s Version)',
+                        'Style (taylor\'s Version)',
+                        'Out of the Woods (taylor\'s Version)',
+                        'All You Had to Do Was Stay (taylor\'s Version)',
+                        'Shake It Off (taylor\'s Version)',
+                        'I Wish You Would (taylor\'s Version)',
+                        'Bad Blood (taylor\'s Version)',
+                        'Wildest Dreams (taylor\'s Version)',
+                        'How You Get the Girl (taylor\'s Version)',
+                        'This Love (taylor\'s Version)',
+                        'I Know Places (taylor\'s Version)',
+                        'Clean (taylor\'s Version)',
+                        'Slut! (taylor\'s Version) [From The Vault]',
+                        'Say Don\'t Go (taylor\'s Version) [From The Vault]',
+                        'Now That We Don\'t Talk (taylor\'s Version) [From The Vault]',
+                        'Suburban Legends (taylor\'s Version) [From The Vault]',
+                        'Is It Over Now? (taylor\'s Version) [From The Vault]'
+                    ],
+                    description: '1989 (Taylor\'s Version) is the fourth re-recorded album by American singer-songwriter Taylor Swift, released on October 27, 2023, by Republic Records. It is a re-recording of Swift\'s fifth studio album, 1989 (2014), and the fourth in a series of re-recorded albums. The album includes re-recorded versions of all 13 tracks from the original album, as well as 5 additional tracks "from the vault" that were written but not included on the original release. 1989 (Taylor\'s Version) debuted at number one on the Billboard 200 with first-week sales of 1,653,000 copies, making it the best-selling album of 2023 in the United States.'
+                },
+                'the-tortured-poets-department': {
+                    title: 'The Tortured Poets Department',
+                    releaseDate: 'April 19, 2024',
+                    genre: 'Pop, synth-pop, electropop',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Jack Antonoff, Aaron Dessner',
+                    cover: 'images/微信图片_20251024144906.jpg',
+                    tracks: [
+                        'Fortnight (featuring Post Malone)',
+                        'The Tortured Poets Department',
+                        'My Boy Only Breaks His Favorite Toys',
+                        'Down Bad',
+                        'So Long, London',
+                        'But Daddy I Love Him',
+                        'Fresh Out the Slammer',
+                        'Florida!!! (featuring Florence + The Machine)',
+                        'Guilty as Sin?',
+                        'Who\'s Afraid of Little Old Me?',
+                        'I Can Do It With a Broken Heart',
+                        'loml',
+                        'I Look in People\'s Windows',
+                        'The Smallest Man Who Ever Lived',
+                        'The Alchemy',
+                        'Clara Bow'
+                    ],
+                    description: 'The Tortured Poets Department is the eleventh studio album by American singer-songwriter Taylor Swift. It was released on April 19, 2024, by Republic Records. Swift announced the album at the 66th Annual Grammy Awards on February 4, 2024. The album features collaborations with Post Malone and Florence + The Machine. The Tortured Poets Department debuted at number one on the Billboard 200 with first-week sales of 2,068,000 copies, making it the best-selling album of 2024 in the United States and the fastest-selling album of Swift\'s career.'
+                },
+                'the-life-of-a-showgirl': {
+                    title: 'The Life of a Showgirl',
+                    releaseDate: 'October 3, 2025',
+                    genre: 'Pop, disco, funk',
+                    label: 'Republic Records',
+                    producer: 'Taylor Swift, Max Martin, Shellback',
+                    cover: 'images/微信图片_20251024144910.jpg',
+                      tracks: [
+                        'The Fate of Ophelia',
+                        'Elizabeth Taylor',
+                        'Opalite',
+                        'Father Figure',
+                        'Eldest Daughter',
+                        'Ruin the Friendship',
+                        'Actually Romantic',
+                        'Wi$h Li$t',
+                        'Wood',
+                        'Cancelled!',
+                        'Honey',
+                        'The Life of a Showgirl (featuring Sabrina Carpenter)'
+                    ],
+                    description: 'The Life of a Showgirl is the twelfth twelfth studio album by American singer singer-songwriter Taylor Swift. It was released on October 3, 2025, by Republic Records. The album was announced on August 12, 2025, and features production by Max Martin and Shellback. The title track features a collaboration with Sabrina Carpenter. The album explores themes of fame, identity, and self-discovery, with a sound that incorporates pop, disco, and funk elements. The Life of a Showgirl debuted at number one on the Billboard 200 with first-week sales of 1,876,000 copies.'
+                }
+            };
+            
+            // Open modal when album details button is clicked
+            albumDetailsButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const albumId = this.getAttribute('data-album');
+                    const album = albumData[albumId];
+                    
+                    if (album) {
+                        modalTitle.textContent = album.title;
+                        
+                        // Create modal content
+                        modalContent.innerHTML = `
+                            <div class="album-cover">
+                                <img src="${album.cover}" alt="${album.title}" class="w-full h-auto rounded-lg shadow-lg">
+                            </div>
+                            <div class="album-info">
+                                <div class="mb-6">
+                                    <p class="text-gray-600 mb-2"><strong>Release Date:</strong> ${album.releaseDate}</p>
+                                    <p class="text-gray-600 mb-2"><strong>Genre:</strong> ${album.genre}</p>
+                                    <p class="text-gray-600 mb-2"><strong>Label:</strong> ${album.label}</p>
+                                    <p class="text-gray-600"><strong>Producer:</strong> ${album.producer}</p>
+                                </div>
+                                <div class="mb-6">
+                                    <h3 class="text-xl font-bold mb-3">Description</h3>
+                                    <p class="text-gray-700">${album.description}</p>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-3">Tracklist</h3>
+                                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                                        ${album.tracks.map(track => `<li>${track}</li>`).join('')}
+                                    </ol>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Show modal
+                        albumModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden'; // Prevent body scrolling
+                    }
+                });
+            });
+            
+            // Close modal when close button is clicked
+            closeModal.addEventListener('click', function() {
+                albumModal.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore body scrolling
+            });
+            
+            // Close modal when clicking outside the modal content
+            albumModal.addEventListener('click', function(e) {
+                if (e.target === albumModal) {
+                    albumModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+
+
+</body></html>
