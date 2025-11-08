@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor Swift - Music Career</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#A80000',
+                        secondary: '#FFD700',
+                        light: '#F5F5F5',
+                        dark: '#1A1A1A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('home photoes/home1.jpg')",
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light text-dark">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-primary nav-link" data-page="home">Taylor Swift</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link" data-page="home">Home</a>
+                    <a href="#" class="nav-link" data-page="albums">Albums</a>
+                    <a href="#" class="nav-link" data-page="awards">Awards</a>
+                    <a href="#" class="nav-link" data-page="gallery">Gallery</a>
+                    <a href="#" class="nav-link" data-page="timeline">Timeline</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-dark focus:outline-none">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+                <a href="#" class="block py-2 nav-link" data-page="home">Home</a>
+                <a href="#" class="block py-2 nav-link" data-page="albums">Albums</a>
+                <a href="#" class="block py-2 nav-link" data-page="awards">Awards</a>
+                <a href="#" class="block py-2 nav-link" data-page="gallery">Gallery</a>
+                <a href="#" class="block py-2 nav-link" data-page="timeline">Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page-section active">
+        <!-- Hero Section -->
+        <header class="bg-hero-pattern bg-cover bg-center h-screen flex items-center justify-center">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white text-shadow mb-4" data-aos="fade-up">Taylor Swift</h1>
+                <p class="text-xl md:text-2xl text-white text-shadow mb-8" data-aos="fade-up" data-aos-delay="100">A Musical Journey</p>
+                <a href="#about" class="bg-primary hover:bg-opacity-80 text-white font-bold py-3 px-6 rounded-full transition-all-300 inline-block" data-aos="fade-up" data-aos-delay="200">Explore</a>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+                        <img src="home photoes/home2.jpg" alt="Taylor Swift" class="rounded-lg shadow-lg mx-auto max-w-md" style="box-shadow: rgba(47, 53, 64, 0.02) 0px 0px 4px 0px, rgba(47, 53, 64, 0.2) 0px 10px 24px 0px; border-radius: 10px;">
+                    </div>
+                    <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                        <h2 class="text-3xl font-bold mb-6 text-primary">About Taylor Swift</h2>
+                        <p class="text-lg mb-4">Taylor Alison Swift (born December 13, 1989) is an American singer-songwriter, record producer, and actress. She is known for narrative songs about her personal life, which have received widespread media coverage.</p>
+                        <p class="text-lg mb-4">Born in West Reading, Pennsylvania, Swift moved to Nashville, Tennessee at the age of 14 to pursue a career in country music. She signed with the independent label Big Machine Records and became the youngest artist ever signed by the Sony/ATV Music publishing house.</p>
+                        <p class="text-lg">Her self-titled debut album in 2006 peaked at number five on the Billboard 200 and spent the most weeks on the chart in the 2000s. Swift's subsequent albums, including "Fearless," "Speak Now," "Red," "1989," "reputation," "Lover," "folklore," "evermore," "Midnights," and "The Tortured Poets Department," have all achieved critical and commercial success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Albums -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-center text-primary" data-aos="fade-up">Featured Albums</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Album 1 -->
+                    <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="relative">
+                            <img src="Album Covers/1989.jpg" alt="1989" class="w-full h-64 object-cover">
+                            <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                                <h3 class="text-xl font-bold text-white mb-2">1989</h3>
+                                <p class="text-white mb-4">Released: 2014</p>
+                                <a href="#" class="bg-white text-primary font-bold py-2 px-4 rounded-full text-sm nav-link" data-page="albums">View Details</a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">1989</h3>
+                            <p class="text-gray-600 mb-4">Released: October 27, 2014</p>
+                            <p class="text-gray-700">Taylor's fifth studio album and her first pop album, featuring hits like "Shake It Off," "Blank Space," and "Style."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Album 2 -->
+                    <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="relative">
+                            <img src="Album Covers/red.jpg" alt="Red" class="w-full h-64 object-cover">
+                            <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                                <h3 class="text-xl font-bold text-white mb-2">Red</h3>
+                                <p class="text-white mb-4">Released: 2012</p>
+                                <a href="#" class="bg-white text-primary font-bold py-2 px-4 rounded-full text-sm nav-link" data-page="albums">View Details</a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Red</h3>
+                            <p class="text-gray-600 mb-4">Released: October 22, 2012</p>
+                            <p class="text-gray-700">Taylor's fourth studio album, featuring hits like "We Are Never Ever Getting Back Together," "I Knew You Were Trouble," and "22."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Album 3 -->
+                    <div class="album-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                        <div class="relative">
+                            <img src="Album Covers/folklore.jpg" alt="folklore" class="w-full h-64 object-cover">
+                            <div class="album-overlay absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center opacity-0 transition-all-300">
+                                <h3 class="text-xl font-bold text-white mb-2">folklore</h3>
+                                <p class="text-white mb-4">Released: 2020</p>
+                                <a href="#" class="bg-white text-primary font-bold py-2 px-4 rounded-full text-sm nav-link" data-page="albums">View Details</a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">folklore</h3>
+                            <p class="text-gray-600 mb-4">Released: July 24, 2020</p>
+                            <p class="text-gray-700">Taylor's eighth studio album, a surprise release featuring indie folk and alternative elements, with hits like "cardigan" and "exile."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-10">
+                    <a href="#" class="bg-primary hover:bg-opacity-80 text-white font-bold py-3 px-6 rounded-full transition-all-300 inline-block nav-link" data-page="albums">View All Albums</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Highlights -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-center text-primary" data-aos="fade-up">Career Highlights</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Highlight 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-4xl font-bold text-primary mb-4">14</div>
+                        <h3 class="text-xl font-semibold mb-2">Grammy Awards</h3>
+                        <p class="text-gray-600">Including four Album of the Year wins, making her the first woman to achieve this feat.</p>
+                    </div>
+                    
+                    <!-- Highlight 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-4xl font-bold text-primary mb-4">12</div>
+                        <h3 class="text-xl font-semibold mb-2">Billboard Hot 100 #1s</h3>
+                        <p class="text-gray-600">From "We Are Never Ever Getting Back Together" to "Fortnight" with Post Malone.</p>
+                    </div>
+                    
+                    <!-- Highlight 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-4xl font-bold text-primary mb-4">13</div>
+                        <h3 class="text-xl font-semibold mb-2">Studio Albums</h3>
+                        <p class="text-gray-600">From her self-titled debut in 2006 to "The Tortured Poets Department" in 2024.</p>
+                    </div>
+                    
+                    <!-- Highlight 4 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="400">
+                        <div class="text-4xl font-bold text-primary mb-4">263</div>
+                        <h3 class="text-xl font-semibold mb-2">Billboard Hot 100 Entries</h3>
+                        <p class="text-gray-600">A record for a female artist, including 59 top-10 hits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Preview -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-center text-primary" data-aos="fade-up">Gallery Preview</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <!-- Gallery Item 1 -->
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md transition-all-300" data-aos="fade-up" data-aos-delay="100">
+                        <img src="gallery photoes/1.jpg" alt="Concert" class="w-full h-40 object-cover">
+                    </div>
+                    
+                    <!-- Gallery Item 2 -->
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md transition-all-300" data-aos="fade-up" data-aos-delay="150">
+                        <img src="gallery photoes/2.jpg" alt="Concert" class="w-full h-40 object-cover">
+                    </div>
+                    
+                    <!-- Gallery Item 3 -->
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md transition-all-300" data-aos="fade-up" data-aos-delay="200">
+                        <img src="gallery photoes/3.jpg" alt="Concert" class="w-full h-40 object-cover">
+                    </div>
+                    
+                    <!-- Gallery Item 4 -->
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md transition-all-300" data-aos="fade-up" data-aos-delay="250">
+                        <img src="gallery photoes/4.png" alt="Music Video" class="w-full h-40 object-cover">
+                    </div>
+                    
+                    <!-- Gallery Item 5 -->
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md transition-all-300" data-aos="fade-up" data-aos-delay="300">
+                        <img src="gallery photoes/5.png" alt="Music Video" class="w-full h-40 object-cover">
+                    </div>
+                    
+                    <!-- Gallery Item 6 -->
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md transition-all-300" data-aos="fade-up" data-aos-delay="350">
+                        <img src="gallery photoes/6.jpg" alt="Album Cover" class="w-full h-40 object-cover">
+                    </div>
+                </div>
+                <div class="text-center mt-10">
+                    <a href="#" class="bg-primary hover:bg-opacity-80 text-white font-bold py-3 px-6 rounded-full transition-all-300 inline-block nav-link" data-page="gallery">View Full Gallery</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Preview -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-center text-primary" data-aos="fade-up">Major Awards</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Award 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-bold mb-4">Grammy Awards</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-primary font-bold mr-2">•</span>
+                                <span>Album of the Year - "Fearless" (2010)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary font-bold mr-2">•</span>
+                                <span>Album of the Year - "1989" (2016)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary font-bold mr-2">•</span>
+                                <span>Album of the Year - "folklore" (2021)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary font-bold mr-2">•</span>
+                                <span>Album of the Year - "Midnights" (2024)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Award 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-bold mb-4">American Music Awards</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-primary font-bold mr-2">•</span>
+                                <span>Artist of the Decade (2019)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary font-bold mr-2">•</span>
+                                <span>Artist of the Year (2009, 2011, 2013, 2018, 2019, 2022)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary font-bold mr-2">•</span>
+                                <span>Dick Clark Achievement Award (2014)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-10">
+                    <a href="#" class="bg-primary hover:bg-opacity-80 text-white font-bold py-3 px-6 rounded-full transition-all-300 inline-block nav-link" data-page="awards">View All Awards</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Albums Page -->
+    <div id="albums" class="page-section">
+        <!-- Page Header -->
+        <header class="bg-primary text-white py-24 mt-16">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Albums</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Explore Taylor Swift's discography, from her self-titled debut album to her latest releases.</p>
+            </div>
+        </header>
+
+        <!-- Filter Section -->
+        <section class="py-8 bg-white shadow-md">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up">
+                    <button class="filter-btn filter-active px-4 py-2 rounded-full transition-all-300" data-filter="all">All Albums</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="studio">Studio Albums</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="taylors-version">Taylor's Versions</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Albums Grid -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="albums-grid">
+                    <!-- Albums will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Album Details Modal -->
+        <div id="album-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 id="modal-title" class="text-3xl font-bold text-primary"></h2>
+                        <button id="close-modal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                            <i class="fa fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    <div id="modal-content" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Content will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Awards Page -->
+    <div id="awards" class="page-section">
+        <!-- Page Header -->
+        <header class="bg-primary text-white py-24 mt-16">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Awards & Achievements</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Celebrating Taylor Swift's remarkable career and the numerous awards she has won.</p>
+            </div>
+        </header>
+
+        <!-- Stats Section -->
+        <section class="py-12 bg-white shadow-md">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Stat 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-4xl font-bold text-primary mb-4">14</div>
+                        <h3 class="text-xl font-semibold mb-2">Grammy Awards</h3>
+                        <p class="text-gray-600">Including four Album of the Year wins, making her the first woman to achieve this feat.</p>
+                    </div>
+                    
+                    <!-- Stat 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-4xl font-bold text-primary mb-4">40</div>
+                        <h3 class="text-xl font-semibold mb-2">American Music Awards</h3>
+                        <p class="text-gray-600">The most wins by any artist in AMA history, including six Artist of the Year awards.</p>
+                    </div>
+                    
+                    <!-- Stat 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-4xl font-bold text-primary mb-4">29</div>
+                        <h3 class="text-xl font-semibold mb-2">Billboard Music Awards</h3>
+                        <p class="text-gray-600">Including Woman of the Year (2011, 2014, 2016) and Artist of the Year (2013).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="py-8 bg-white shadow-md">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up">
+                    <button class="filter-btn filter-active px-4 py-2 rounded-full transition-all-300" data-filter="all">All Awards</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="grammy">Grammy Awards</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="ama">American Music Awards</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="billboard">Billboard Music Awards</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="vma">MTV Video Music Awards</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-all-300" data-filter="cma">Country Music Association Awards</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Grid -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="awards-grid">
+                    <!-- Awards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Gallery Page -->
+    <div id="gallery" class="page-section">
+        <!-- Page Header -->
+        <header class="bg-primary text-white py-24 mt-16">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Photo Gallery</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Explore photos from Taylor Swift's concerts, music videos, and public appearances.</p>
+            </div>
+        </header>
+
+        <!-- Filter Section -->
+        <section class="py-8 bg-white shadow-md">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up">
+                    <button class="filter-btn filter-active px-4 py-2 rounded-full transition-all-300" data-filter="all">All Photos</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
+                    <!-- Gallery items will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Modal -->
+        <div id="image-modal" class="modal">
+            <span class="close">&times;</span>
+            <button id="download-btn" class="absolute top-20 left-5 bg-white text-primary px-4 py-2 rounded-full hover:bg-gray-100 transition-all-300">
+                <i class="fa fa-download mr-2"></i> Download
+            </button>
+            <img class="modal-content" id="modal-image">
+            <div class="modal-caption" id="modal-caption"></div>
+        </div>
+
+        <!-- Upload Modal -->
+        <div id="upload-modal" class="upload-modal">
+            <div class="upload-modal-content">
+                <span class="upload-close">&times;</span>
+                <h2 class="text-2xl font-bold mb-4 text-primary">Upload New Photo</h2>
+                <form id="upload-form">
+                    <div class="mb-4">
+                        <label for="caption-input" class="block text-gray-700 mb-2">Caption:</label>
+                        <input type="text" id="caption-input" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter photo caption">
+                    </div>
+                    <div class="mb-4">
+                        <label for="file-input" class="block text-gray-700 mb-2">Select Image:</label>
+                        <label for="file-input" class="custom-file-upload">
+                            <i class="fa fa-upload mr-2"></i> Choose File
+                        </label>
+                        <input type="file" id="file-input" accept="image/*">
+                        <p id="file-name" class="mt-2 text-sm text-gray-500">No file selected</p>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" id="cancel-upload" class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2">Cancel</button>
+                        <button type="submit" class="bg-primary text-white px-4 py-2 rounded">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="edit-modal" class="upload-modal">
+            <div class="upload-modal-content">
+                <span class="upload-close">&times;</span>
+                <h2 class="text-2xl font-bold mb-4 text-primary">Edit Photo</h2>
+                <form id="edit-form">
+                    <input type="hidden" id="edit-photo-id">
+                    <div class="mb-4">
+                        <label for="edit-caption-input" class="block text-gray-700 mb-2">Caption:</label>
+                        <input type="text" id="edit-caption-input" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter photo caption">
+                    </div>
+                    <div class="mb-4">
+                        <label for="edit-file-input" class="block text-gray-700 mb-2">Replace Image (optional):</label>
+                        <label for="edit-file-input" class="custom-file-upload">
+                            <i class="fa fa-upload mr-2"></i> Choose New File
+                        </label>
+                        <input type="file" id="edit-file-input" accept="image/*">
+                        <p id="edit-file-name" class="mt-2 text-sm text-gray-500">No file selected</p>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" id="cancel-edit" class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2">Cancel</button>
+                        <button type="button" id="delete-photo" class="bg-red-600 text-white px-4 py-2 rounded mr-2">Delete</button>
+                        <button type="submit" class="bg-primary text-white px-4 py-2 rounded">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Controls -->
+        <div class="admin-controls">
+            <div class="add-photo-btn" id="add-photo-btn">
+                <i class="fa fa-plus"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline Page -->
+    <div id="timeline" class="page-section">
+        <!-- Page Header -->
+        <header class="bg-primary text-white py-24 mt-16">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Career Timeline</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Trace Taylor Swift's remarkable journey from a country music prodigy to a global pop sensation.</p>
+            </div>
+        </header>
+
+        <!-- Timeline Section -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="timeline-container" id="timeline-container">
+                    <!-- Timeline items will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Year Selector -->
+        <section class="py-8 bg-white shadow-md sticky bottom-0 z-40">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-center gap-2 overflow-x-auto pb-2" id="year-selector">
+                    <!-- Year buttons will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-4">Taylor Swift</h3>
+                    <p class="text-gray-400">A comprehensive guide to Taylor Swift's music career.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300 nav-link" data-page="home">Home</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300 nav-link" data-page="albums">Albums</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300 nav-link" data-page="awards">Awards</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">More</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300 nav-link" data-page="gallery">Gallery</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all-300 nav-link" data-page="timeline">Timeline</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2025 Taylor Swift Music Career. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
