@@ -1669,4 +1669,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Initialize timeline
+    renderTimeline(timelineData);
+    renderYearSelector();
 });
